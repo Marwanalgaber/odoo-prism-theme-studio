@@ -25,13 +25,15 @@ body.o_prism {
         animation: prism-grid 2.6s linear infinite; background-size: 64px 64px;
         mask-image: linear-gradient(180deg, transparent, #000 35%);
     }
-    .o_web_client { position: relative; z-index: 1; background: transparent !important; }
+    // In Odoo 19 <body> itself is .o_web_client: its children are lifted above the moving layers
+    > .o_navbar, > header, > .o_action_manager, > .o-main-components-container { position: relative; z-index: 1; }
     // the spotlight follows the mouse (set by the script), only when animation is on
-    &.o_prism_motion .o_web_client::before {
-        content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    &::after {
+        content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .4s ease;
         background: radial-gradient(520px circle at var(--prism-mx, 50%) var(--prism-my, 30%),
                     color-mix(in srgb, var(--prism-accent) 22%, transparent), transparent 62%);
     }
+    &.o_prism_motion::after { opacity: 1; }
     .o_action_manager, .o_action, .o_content, .o_view_controller { background: transparent !important; }
 
     // frosted top bar
@@ -131,7 +133,7 @@ body.o_prism {
 
 @media (prefers-reduced-motion: reduce) {
     body.o_prism::before, body.o_prism .btn-primary:hover::after { animation: none !important; }
-    body.o_prism .o_web_client::before { display: none; }
+    body.o_prism::after { display: none; }
     body.o_prism .o_kanban_record:hover { transform: none; }
 }
 

@@ -1,6 +1,6 @@
 {
     'name': 'Prism Theme Studio',
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.0.2',
     'category': 'Themes/Backend',
     'summary': 'Backend theme with 10 original animated backgrounds, accent colour, fonts, density and live preview, '
                'chosen by every user for himself',
