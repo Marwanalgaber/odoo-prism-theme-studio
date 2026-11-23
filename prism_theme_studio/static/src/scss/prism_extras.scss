@@ -190,3 +190,6 @@ html[dir="rtl"] .o_prism_studio .o_prism_card {
     .fa-check { right: auto; left: 8px; }
     .o_prism_now { left: auto; right: 8px; }
 }
+
+// "My home" scrolls (Odoo clips every action with overflow: hidden, with a stronger selector than ours)
+.o_action_manager > .o_action.o_prism_home { overflow-y: auto !important; height: 100%; }
