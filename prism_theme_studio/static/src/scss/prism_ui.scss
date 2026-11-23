@@ -1,0 +1,179 @@
+// Prism Theme Studio: how a style is applied to the backend. Everything is under body.o_prism, so nothing changes for a
+// user who has not switched the theme on. Surfaces use Odoo's own colour variables (light and dark bundle).
+body.o_prism {
+    --prism-accent: var(--prism-user-accent, var(--prism-default-accent, #7c3aed));
+    --prism-accent-soft: color-mix(in srgb, var(--prism-accent) 16%, transparent);
+    --prism-radius: 14px;
+    --prism-surface: #{$o-view-background-color};
+    --prism-panel: #{rgba($o-view-background-color, .84)};
+    --prism-panel-line: #{rgba($o-main-text-color, .08)};
+    --prism-shadow: 0 10px 30px rgba(0, 0, 0, .14), 0 2px 6px rgba(0, 0, 0, .06);
+    --prism-font: var(--prism-font-stack, inherit);
+    background: var(--prism-bg) !important;
+    background-attachment: fixed !important;
+    font-family: var(--prism-font);
+
+    // the moving layer, above the backdrop and below the screens
+    &::before {
+        content: ""; position: fixed; inset: -15%; z-index: 0; pointer-events: none; background: var(--prism-glow); opacity: 0;
+        transition: opacity .6s ease;
+    }
+    &.o_prism_motion::before { opacity: 1; animation: prism-drift 28s ease-in-out infinite alternate; }
+    &.o_prism_motion.o_prism_p_midnight::before { animation: prism-twinkle 5s ease-in-out infinite alternate; background-size: 300px 260px; }
+    &.o_prism_motion.o_prism_p_neon::before {
+        inset: 58% -60% -30% -60%; transform: perspective(380px) rotateX(64deg); transform-origin: 50% 0;
+        animation: prism-grid 2.6s linear infinite; background-size: 64px 64px;
+        mask-image: linear-gradient(180deg, transparent, #000 35%);
+    }
+    .o_web_client { position: relative; z-index: 1; background: transparent !important; }
+    // the spotlight follows the mouse (set by the script), only when animation is on
+    &.o_prism_motion .o_web_client::before {
+        content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        background: radial-gradient(520px circle at var(--prism-mx, 50%) var(--prism-my, 30%),
+                    color-mix(in srgb, var(--prism-accent) 22%, transparent), transparent 62%);
+    }
+    .o_action_manager, .o_action, .o_content, .o_view_controller { background: transparent !important; }
+
+    // frosted top bar
+    .o_main_navbar {
+        background: var(--prism-nav-bg) !important; border-bottom: 1px solid var(--prism-nav-line) !important;
+        backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: none !important;
+        &, .o_menu_brand, .o_menu_sections .o_nav_entry, .o_menu_sections .dropdown-toggle, .o_menu_systray .o_nav_entry,
+        .o_menu_systray > div > button, .o_menu_systray .dropdown-toggle, .o_menu_toggle, .fa:not(.o_prism_systray_icon), .oi { color: var(--prism-nav-text) !important; }
+        .o_menu_sections .o_nav_entry:hover, .o_menu_sections .dropdown-toggle:hover, .o_menu_systray button:hover {
+            background: color-mix(in srgb, var(--prism-nav-text) 12%, transparent) !important;
+        }
+    }
+
+    // frosted control panel card
+    .o_control_panel {
+        background: var(--prism-panel) !important; margin: 12px 14px 0; border-radius: var(--prism-radius);
+        border: 1px solid var(--prism-panel-line) !important; box-shadow: var(--prism-shadow);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+
+    // forms float on the backdrop
+    .o_form_view .o_form_sheet_bg { background: transparent !important; border: 0 !important; }
+    .o_form_view .o_form_sheet { border-radius: var(--prism-radius); box-shadow: var(--prism-shadow); border: 1px solid var(--prism-panel-line); }
+    .modal .o_form_view .o_form_sheet { box-shadow: none; border: 0; }
+    .modal-content { border-radius: var(--prism-radius); overflow: hidden; }
+
+    // lists in a card
+    .o_list_view .o_content > .o_list_renderer {
+        background: var(--prism-surface); margin: 12px 14px 14px; border-radius: var(--prism-radius);
+        box-shadow: var(--prism-shadow); border: 1px solid var(--prism-panel-line);
+    }
+    .o_list_renderer .o_list_table thead th { background: var(--prism-surface); }
+
+    // kanban
+    .o_kanban_renderer { background: transparent !important; }
+    .o_kanban_record {
+        border-radius: calc(var(--prism-radius) - 4px); box-shadow: 0 4px 14px rgba(0, 0, 0, .10); border-color: transparent;
+        transition: transform .18s ease, box-shadow .18s ease;
+        &:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0, 0, 0, .16), 0 0 0 1px var(--prism-accent-soft); }
+    }
+    .o_kanban_group { background: color-mix(in srgb, var(--prism-surface) 55%, transparent) !important; border-radius: var(--prism-radius); margin: 8px 6px; }
+    .o_kanban_header_title, .o_kanban_group .o_column_title { color: var(--prism-on-bg); }
+    .o_kanban_group .o_kanban_header_title, .o_kanban_group .o_column_title { color: inherit; }
+    .o_view_nocontent { color: var(--prism-on-bg); }
+    .o_view_nocontent .o_nocontent_help { background: var(--prism-panel); border-radius: var(--prism-radius); padding: 24px; color: $o-main-text-color; }
+
+    // accent
+    .btn-primary {
+        position: relative; overflow: hidden;
+        background-color: var(--prism-accent) !important; border-color: var(--prism-accent) !important; color: #fff !important;
+        box-shadow: 0 4px 14px color-mix(in srgb, var(--prism-accent) 35%, transparent);
+        &:hover, &:focus { filter: brightness(1.08); }
+        &::after {      // a light sheen crosses the button on hover
+            content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+            background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .35), transparent); transform: skewX(-18deg);
+        }
+        &:hover::after { animation: prism-sheen .7s ease; }
+    }
+    .o_control_panel { box-shadow: var(--prism-shadow), inset 0 1px 0 rgba(255, 255, 255, .45) !important; }
+    .btn { border-radius: 10px; }
+    .o_searchview, .o_searchview_input_container { border-radius: 10px; }
+    .form-check-input:checked { background-color: var(--prism-accent); border-color: var(--prism-accent); }
+    .o_field_widget input:focus, .o_field_widget textarea:focus, .o_searchview:focus-within { border-color: var(--prism-accent) !important; }
+    .nav-tabs .nav-link.active { border-top: 2px solid var(--prism-accent); }
+    .o_arrow_button_current, .o_statusbar_status .o_arrow_button.o_arrow_button_current { background-color: var(--prism-accent) !important; border-color: var(--prism-accent) !important; color: #fff !important; }
+    .o-dropdown--menu { border-radius: 12px; box-shadow: var(--prism-shadow); }
+
+    // compact spacing
+    &.o_prism_compact {
+        .o_list_renderer .o_data_row > td, .o_list_renderer thead th { padding-top: .2rem !important; padding-bottom: .2rem !important; }
+        .o_form_view .o_inner_group .o_cell { padding-bottom: 2px; }
+        .o_form_view .o_form_sheet { padding-top: 12px; padding-bottom: 12px; }
+        .o_control_panel { padding-top: 6px !important; padding-bottom: 6px !important; }
+        .o_kanban_record { margin-bottom: 6px; }
+    }
+
+    // fonts (no external download: system families)
+    &.o_prism_f_humanist { --prism-font-stack: "Segoe UI", "Helvetica Neue", Ubuntu, Cantarell, "Noto Sans", Arial, sans-serif; }
+    &.o_prism_f_rounded { --prism-font-stack: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Segoe UI", sans-serif; }
+    &.o_prism_f_serif { --prism-font-stack: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif; }
+    &.o_prism_f_mono {
+        --prism-font-stack: inherit;
+        h1, h2, h3, .o_form_label, .o_control_panel .breadcrumb, .o_list_table thead th, .o_kanban_record strong {
+            font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace; letter-spacing: -.01em;
+        }
+    }
+}
+
+@keyframes prism-drift {
+    0% { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+    50% { transform: translate3d(4%, 3%, 0) rotate(6deg) scale(1.08); }
+    100% { transform: translate3d(-2%, 4%, 0) rotate(-4deg) scale(1.03); }
+}
+@keyframes prism-sheen { from { left: -60%; } to { left: 120%; } }
+@keyframes prism-twinkle { 0% { opacity: .25; } 100% { opacity: 1; } }
+@keyframes prism-grid { from { background-position: 0 0; } to { background-position: 0 64px; } }
+
+@media (prefers-reduced-motion: reduce) {
+    body.o_prism::before, body.o_prism .btn-primary:hover::after { animation: none !important; }
+    body.o_prism .o_web_client::before { display: none; }
+    body.o_prism .o_kanban_record:hover { transform: none; }
+}
+
+// ---------------------------------------------------------------- the studio panel (shown also when the theme is off)
+.o_prism_studio {
+    width: 360px; max-height: 78vh; overflow: auto; padding: 14px 16px 16px;
+    .o_prism_kicker { font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: #7c3aed; }
+    .o_prism_head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .o_prism_label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .65; margin: 14px 0 6px; }
+    .o_prism_grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .o_prism_card {
+        position: relative; height: 64px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; overflow: hidden;
+        background-size: cover !important; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); padding: 0; text-align: left;
+        transition: transform .15s ease, border-color .15s ease;
+        &:hover { transform: translateY(-2px); }
+        &.active { border-color: var(--prism-pick, #7c3aed); box-shadow: 0 0 0 3px color-mix(in srgb, var(--prism-pick, #7c3aed) 30%, transparent); }
+        span {
+            position: absolute; left: 8px; bottom: 6px; font-size: .74rem; font-weight: 700; color: #fff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+        }
+        .fa-check { position: absolute; right: 8px; top: 7px; color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+    }
+    .o_prism_swatches { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .o_prism_swatch {
+        width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, .15); cursor: pointer; padding: 0;
+        &.active { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--prism-pick, #7c3aed); }
+        &.o_prism_auto { background: conic-gradient(#ef4444, #f59e0b, #10b981, #3b82f6, #8b5cf6, #ef4444); }
+    }
+    .o_prism_color_input { width: 34px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; }
+    .o_prism_segment {
+        display: inline-flex; padding: 3px; border-radius: 10px; background: rgba(127, 127, 127, .14);
+        button { border: 0; background: transparent; padding: 4px 12px; border-radius: 8px; font-size: .8rem; font-weight: 600; color: inherit; }
+        button.active { background: var(--prism-pick, #7c3aed); color: #fff; }
+    }
+    .o_prism_off_note { font-size: .8rem; opacity: .7; margin-top: 6px; }
+    .o_prism_now {
+        position: absolute; left: 8px; top: 6px; font-size: .64rem; font-weight: 700; color: #fff; padding: 1px 6px;
+        border-radius: 6px; background: rgba(0, 0, 0, .35);
+    }
+    .o_prism_card:first-child { grid-column: span 2; }       // "Follow the sun" gets the wide card
+}
+.o_prism_systray_icon {
+    background: conic-gradient(from 210deg, #14b8a6, #7c3aed, #ec4899, #f59e0b, #14b8a6);
+    -webkit-background-clip: text; background-clip: text; color: transparent !important; font-size: 1.05rem;
+}

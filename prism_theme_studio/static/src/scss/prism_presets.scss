@@ -1,0 +1,105 @@
+// Prism Theme Studio: the ten styles. Each style is a body class (o_prism_p_<id>) that sets:
+//   --prism-bg            the backdrop (layered gradients / SVG patterns, no image files)
+//   --prism-glow          the moving layer drawn above the backdrop when animation is on
+//   --prism-nav-bg/-text/-line   the frosted top bar
+//   --prism-on-bg         text drawn straight on the backdrop (kanban group titles, empty helpers)
+//   --prism-default-accent the accent colour when the user has not picked one
+$prism-star: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.10' stroke-width='1.2'%3E%3Crect x='18' y='18' width='28' height='28'/%3E%3Crect x='18' y='18' width='28' height='28' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3Cpath d='M0 0L18 18M64 0L46 18M0 64L18 46M64 64L46 46'/%3E%3C/g%3E%3C/svg%3E";
+$prism-dunes: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 320' preserveAspectRatio='none'%3E%3Cpath d='M0 180 C 200 120 400 220 600 170 S 1000 110 1200 160 V320 H0Z' fill='%23e9a86a' fill-opacity='.55'/%3E%3Cpath d='M0 230 C 250 180 450 270 700 220 S 1050 190 1200 230 V320 H0Z' fill='%23d4874a' fill-opacity='.6'/%3E%3Cpath d='M0 280 C 300 240 600 310 900 270 S 1100 260 1200 280 V320 H0Z' fill='%23b8682f' fill-opacity='.7'/%3E%3C/svg%3E";
+
+body.o_prism {
+    &.o_prism_p_aurora {
+        --prism-bg: radial-gradient(60% 50% at 15% 10%, rgba(20, 184, 166, .55), transparent 70%),
+                    radial-gradient(50% 45% at 85% 20%, rgba(124, 58, 237, .5), transparent 70%),
+                    radial-gradient(55% 50% at 50% 100%, rgba(34, 197, 94, .35), transparent 70%),
+                    linear-gradient(160deg, #04131d, #071f2e 55%, #0b1024);
+        --prism-glow: radial-gradient(35% 30% at 30% 40%, rgba(45, 212, 191, .35), transparent 70%),
+                      radial-gradient(30% 28% at 70% 60%, rgba(167, 139, 250, .32), transparent 70%);
+        --prism-nav-bg: rgba(4, 19, 29, .55); --prism-nav-text: #e6fffb; --prism-nav-line: rgba(255, 255, 255, .10);
+        --prism-on-bg: #e6fffb; --prism-default-accent: #14b8a6;
+    }
+    &.o_prism_p_mesh {
+        --prism-bg: radial-gradient(45% 40% at 10% 15%, #fbcfe8, transparent 70%),
+                    radial-gradient(45% 40% at 90% 10%, #bfdbfe, transparent 70%),
+                    radial-gradient(50% 45% at 80% 90%, #fed7aa, transparent 70%),
+                    radial-gradient(45% 40% at 15% 85%, #bbf7d0, transparent 70%),
+                    #fdf4ff;
+        --prism-glow: radial-gradient(30% 28% at 40% 40%, rgba(244, 114, 182, .25), transparent 70%),
+                      radial-gradient(28% 26% at 65% 65%, rgba(96, 165, 250, .25), transparent 70%);
+        --prism-nav-bg: rgba(255, 255, 255, .6); --prism-nav-text: #3b0764; --prism-nav-line: rgba(59, 7, 100, .10);
+        --prism-on-bg: #3b0764; --prism-default-accent: #c026d3;
+    }
+    &.o_prism_p_dunes {
+        --prism-bg: url("#{$prism-dunes}") bottom / 100% 46% no-repeat,
+                    radial-gradient(18% 22% at 78% 22%, rgba(255, 247, 214, .95), rgba(255, 220, 150, .35) 60%, transparent 75%),
+                    linear-gradient(180deg, #fbe3bd 0%, #f6cf98 55%, #efb877 100%);
+        --prism-glow: radial-gradient(40% 20% at 50% 75%, rgba(255, 237, 213, .45), transparent 70%);
+        --prism-nav-bg: rgba(124, 58, 12, .55); --prism-nav-text: #fff7ed; --prism-nav-line: rgba(255, 255, 255, .15);
+        --prism-on-bg: #5c2d0c; --prism-default-accent: #c2410c;
+    }
+    &.o_prism_p_midnight {
+        --prism-bg: radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+                    radial-gradient(1px 1px at 120px 80px, rgba(255, 255, 255, .8), transparent),
+                    radial-gradient(1.5px 1.5px at 200px 160px, #fff, transparent),
+                    radial-gradient(1px 1px at 300px 40px, rgba(255, 255, 255, .7), transparent),
+                    radial-gradient(60% 50% at 70% 0%, rgba(79, 70, 229, .35), transparent 70%),
+                    linear-gradient(180deg, #050816, #0b1033 60%, #111a44);
+        background-size: 340px 220px, 340px 220px, 340px 220px, 340px 220px, 100% 100%, 100% 100%;
+        --prism-glow: radial-gradient(1.5px 1.5px at 60px 50px, #fff, transparent),
+                      radial-gradient(2px 2px at 240px 120px, #c7d2fe, transparent),
+                      radial-gradient(1.5px 1.5px at 160px 200px, #fff, transparent);
+        --prism-nav-bg: rgba(5, 8, 22, .6); --prism-nav-text: #e0e7ff; --prism-nav-line: rgba(255, 255, 255, .08);
+        --prism-on-bg: #e0e7ff; --prism-default-accent: #818cf8;
+    }
+    &.o_prism_p_glass {
+        --prism-bg: radial-gradient(14% 18% at 18% 30%, rgba(255, 255, 255, .25), transparent 70%),
+                    radial-gradient(10% 14% at 80% 70%, rgba(255, 255, 255, .2), transparent 70%),
+                    radial-gradient(20% 25% at 60% 15%, rgba(56, 189, 248, .45), transparent 70%),
+                    linear-gradient(135deg, #0ea5e9 0%, #1d4ed8 55%, #1e1b4b 100%);
+        --prism-glow: radial-gradient(12% 15% at 35% 55%, rgba(255, 255, 255, .22), transparent 70%),
+                      radial-gradient(9% 12% at 70% 35%, rgba(255, 255, 255, .18), transparent 70%);
+        --prism-nav-bg: rgba(255, 255, 255, .16); --prism-nav-text: #ffffff; --prism-nav-line: rgba(255, 255, 255, .25);
+        --prism-on-bg: #ffffff; --prism-default-accent: #0284c7;
+    }
+    &.o_prism_p_paper {
+        --prism-bg: linear-gradient(rgba(37, 99, 235, .10) 1px, transparent 1px) 0 0 / 120px 120px,
+                    linear-gradient(90deg, rgba(37, 99, 235, .10) 1px, transparent 1px) 0 0 / 120px 120px,
+                    linear-gradient(rgba(37, 99, 235, .05) 1px, transparent 1px) 0 0 / 24px 24px,
+                    linear-gradient(90deg, rgba(37, 99, 235, .05) 1px, transparent 1px) 0 0 / 24px 24px,
+                    #f8f6f1;
+        --prism-glow: none;
+        --prism-nav-bg: rgba(255, 253, 248, .85); --prism-nav-text: #1f2937; --prism-nav-line: rgba(31, 41, 55, .10);
+        --prism-on-bg: #1f2937; --prism-default-accent: #2563eb;
+    }
+    &.o_prism_p_arabesque {
+        --prism-bg: url("#{$prism-star}") 0 0 / 64px 64px,
+                    radial-gradient(50% 40% at 50% 0%, rgba(212, 160, 23, .25), transparent 70%),
+                    linear-gradient(160deg, #03392b, #064e3b 50%, #022c22);
+        --prism-glow: radial-gradient(30% 25% at 50% 30%, rgba(250, 204, 21, .14), transparent 70%);
+        --prism-nav-bg: rgba(3, 57, 43, .7); --prism-nav-text: #ecfdf5; --prism-nav-line: rgba(250, 204, 21, .25);
+        --prism-on-bg: #ecfdf5; --prism-default-accent: #b7791f;
+    }
+    &.o_prism_p_sunset {
+        --prism-bg: radial-gradient(22% 26% at 50% 78%, rgba(254, 240, 138, .9), rgba(251, 146, 60, .5) 55%, transparent 75%),
+                    linear-gradient(180deg, #312e81 0%, #7e22ce 30%, #db2777 58%, #f97316 82%, #fdba74 100%);
+        --prism-glow: radial-gradient(40% 18% at 50% 80%, rgba(254, 215, 170, .35), transparent 70%);
+        --prism-nav-bg: rgba(49, 46, 129, .45); --prism-nav-text: #ffffff; --prism-nav-line: rgba(255, 255, 255, .18);
+        --prism-on-bg: #ffffff; --prism-default-accent: #ea580c;
+    }
+    &.o_prism_p_graphite {
+        --prism-bg: radial-gradient(60% 50% at 80% 0%, rgba(82, 82, 91, .45), transparent 70%),
+                    radial-gradient(50% 45% at 0% 100%, rgba(63, 63, 70, .5), transparent 70%),
+                    linear-gradient(180deg, #18181b, #111113);
+        --prism-glow: radial-gradient(30% 25% at 60% 40%, rgba(161, 161, 170, .10), transparent 70%);
+        --prism-nav-bg: rgba(24, 24, 27, .7); --prism-nav-text: #f4f4f5; --prism-nav-line: rgba(255, 255, 255, .08);
+        --prism-on-bg: #f4f4f5; --prism-default-accent: #f59e0b;
+    }
+    &.o_prism_p_neon {
+        --prism-bg: radial-gradient(70% 30% at 50% 58%, rgba(236, 72, 153, .55), transparent 70%),
+                    linear-gradient(180deg, #0b0221 0%, #1a0536 50%, #2a0845 58%, #0b0221 100%);
+        --prism-glow: repeating-linear-gradient(90deg, rgba(232, 121, 249, .45) 0 1px, transparent 1px 64px),
+                      repeating-linear-gradient(0deg, rgba(232, 121, 249, .45) 0 1px, transparent 1px 64px);
+        --prism-nav-bg: rgba(11, 2, 33, .6); --prism-nav-text: #f5d0fe; --prism-nav-line: rgba(232, 121, 249, .3);
+        --prism-on-bg: #f5d0fe; --prism-default-accent: #e879f9;
+    }
+}

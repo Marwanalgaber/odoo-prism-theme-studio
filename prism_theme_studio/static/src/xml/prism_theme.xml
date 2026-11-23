@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="prism_theme_studio.Studio">
+        <Dropdown position="'bottom-end'" menuClass="'o_prism_studio_menu p-0'">
+            <button class="o_nav_entry o_prism_systray btn btn-link border-0" title="Prism Theme Studio">
+                <i class="fa fa-paint-brush o_prism_systray_icon" role="img" aria-label="Theme studio"/>
+            </button>
+            <t t-set-slot="content">
+                <div class="o_prism_studio" t-attf-style="--prism-pick: {{pick}};">
+                    <div class="o_prism_head">
+                        <div>
+                            <div class="o_prism_kicker">Prism Theme Studio</div>
+                            <div class="fw-bold">Your look</div>
+                        </div>
+                        <div class="form-check form-switch m-0">
+                            <input class="form-check-input" type="checkbox" role="switch" id="o_prism_enabled"
+                                   t-att-checked="state.enabled" t-on-change="(ev) => this.set({ enabled: ev.target.checked })"/>
+                            <label class="form-check-label small" for="o_prism_enabled" t-esc="state.enabled ? labels.on : labels.off"/>
+                        </div>
+                    </div>
+                    <div t-if="!state.enabled" class="o_prism_off_note">
+                        Switch it on to use the theme. Only your own screens change.
+                    </div>
+
+                    <div class="o_prism_label">Style</div>
+                    <div class="o_prism_grid">
+                        <t t-foreach="presets" t-as="p" t-key="p.id">
+                            <button t-attf-class="o_prism_card {{state.preset === p.id ? 'active' : ''}}" t-att-style="'background: ' + p.thumb"
+                                    t-on-click="() => this.set({ preset: p.id, enabled: true })" t-att-title="p.name">
+                                <i t-if="state.preset === p.id" class="fa fa-check"/>
+                                <small t-if="p.id === 'auto'" class="o_prism_now">now: <t t-esc="sunNow"/></small>
+                                <span t-esc="p.name"/>
+                            </button>
+                        </t>
+                    </div>
+
+                    <div class="o_prism_label">Accent colour</div>
+                    <div class="o_prism_swatches">
+                        <button t-attf-class="o_prism_swatch o_prism_auto {{!state.accent ? 'active' : ''}}" title="Colour of the style"
+                                t-on-click="() => this.set({ accent: false })"/>
+                        <t t-foreach="swatches" t-as="color" t-key="color">
+                            <button t-attf-class="o_prism_swatch {{state.accent === color ? 'active' : ''}}" t-att-style="'background: ' + color"
+                                    t-att-title="color" t-on-click="() => this.set({ accent: color })"/>
+                        </t>
+                        <input type="color" class="o_prism_color_input" title="Any colour" t-att-value="pick" t-on-change="onColorInput"/>
+                    </div>
+
+                    <div class="o_prism_label">Font</div>
+                    <select class="form-select form-select-sm" t-on-change="(ev) => this.set({ font: ev.target.value })">
+                        <t t-foreach="fonts" t-as="f" t-key="f.id">
+                            <option t-att-value="f.id" t-att-selected="state.font === f.id" t-esc="f.name"/>
+                        </t>
+                    </select>
+
+                    <div class="d-flex align-items-center justify-content-between mt-3 gap-2 flex-wrap">
+                        <div>
+                            <div class="o_prism_label mt-0">Spacing</div>
+                            <div class="o_prism_segment">
+                                <button t-att-class="state.density === 'comfortable' ? 'active' : ''" t-on-click="() => this.set({ density: 'comfortable' })">Comfortable</button>
+                                <button t-att-class="state.density === 'compact' ? 'active' : ''" t-on-click="() => this.set({ density: 'compact' })">Compact</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="o_prism_label mt-0">Animation</div>
+                            <div class="form-check form-switch m-0">
+                                <input class="form-check-input" type="checkbox" role="switch" id="o_prism_motion"
+                                       t-att-checked="state.motion" t-on-change="(ev) => this.set({ motion: ev.target.checked })"/>
+                                <label class="form-check-label small" for="o_prism_motion" t-esc="state.motion ? labels.moving : labels.still"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="btn btn-sm btn-link px-0" t-on-click="reset"><i class="fa fa-undo me-1"/>Back to default</button>
+                    </div>
+                </div>
+            </t>
+        </Dropdown>
+    </t>
+</templates>
