@@ -69,6 +69,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="o_prism_label">Screens inside</div>
+                    <div class="o_prism_segment">
+                        <t t-foreach="insideOptions" t-as="o" t-key="o.id">
+                            <button t-att-class="state.inside === o.id ? 'active' : ''" t-on-click="() => this.set({ inside: o.id })" t-esc="o.name"/>
+                        </t>
+                    </div>
+                    <div class="o_prism_off_note">Dark styles show the screens in dark mode. The page reloads once when this changes.</div>
                     <div class="d-flex justify-content-end mt-3">
                         <button class="btn btn-sm btn-link px-0" t-on-click="reset"><i class="fa fa-undo me-1"/>Back to default</button>
                     </div>

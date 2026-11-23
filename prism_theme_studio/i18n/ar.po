@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0-20261102\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 11:52+0000\n"
-"PO-Revision-Date: 2026-11-23 11:52+0000\n"
+"POT-Creation-Date: 2026-11-23 12:17+0000\n"
+"PO-Revision-Date: 2026-11-23 12:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar_001\n"
@@ -24,6 +24,16 @@ msgstr "‎#RRGGBB. اتركه فارغاً لاستخدام لون النمط."
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_accent
 msgid "Accent colour"
 msgstr "لون التمييز"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_inside__dark
+msgid "Always dark"
+msgstr "داكن دائماً"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_inside__light
+msgid "Always light"
+msgstr "فاتح دائماً"
 
 #. module: prism_theme_studio
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_motion
@@ -78,6 +88,30 @@ msgstr "مضغوط"
 #. module: prism_theme_studio
 #. odoo-javascript
 #: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+msgid "Dark"
+msgstr "داكن"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid ""
+"Dark styles show the screens in dark mode. The page reloads once when this "
+"changes."
+msgstr ""
+"الأنماط الداكنة تعرض الشاشات بالوضع الداكن. تُعاد تحميل الصفحة مرة واحدة عند"
+" التغيير."
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_inside
+msgid ""
+"Dark styles show the screens in dark mode; or always light / always dark."
+msgstr ""
+"الأنماط الداكنة تعرض الشاشات بالوضع الداكن، أو اختر فاتح دائماً / داكن "
+"دائماً."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__dunes
 msgid "Desert Dunes"
 msgstr "كثبان الصحراء"
@@ -95,6 +129,11 @@ msgstr "خط تحريري مذيّل"
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__arabesque
 msgid "Emerald Arabesque"
 msgstr "الأرابيسك الزمردي"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_inside__style
+msgid "Follow the style"
+msgstr "حسب النمط"
 
 #. module: prism_theme_studio
 #. odoo-javascript
@@ -129,6 +168,12 @@ msgstr "جرافيت"
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__humanist
 msgid "Humanist sans"
 msgstr "خط إنساني"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+msgid "Light"
+msgstr "فاتح"
 
 #. module: prism_theme_studio
 #. odoo-javascript
@@ -197,6 +242,13 @@ msgstr "مستدير"
 #. module: prism_theme_studio
 #. odoo-javascript
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_inside
+msgid "Screens inside"
+msgstr "الشاشات من الداخل"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_density
 msgid "Spacing"
 msgstr "المسافات"
@@ -209,6 +261,7 @@ msgstr "ثابتة"
 
 #. module: prism_theme_studio
 #. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
 msgid "Style"
 msgstr "النمط"
@@ -225,6 +278,18 @@ msgstr "أفق الغروب"
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
 msgid "Switch it on to use the theme. Only your own screens change."
 msgstr "فعّله لاستخدام الثيم. تتغير شاشاتك أنت فقط."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+msgid "Switching the screens to dark…"
+msgstr "جارٍ تحويل الشاشات إلى الوضع الداكن…"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+msgid "Switching the screens to light…"
+msgstr "جارٍ تحويل الشاشات إلى الوضع الفاتح…"
 
 #. module: prism_theme_studio
 #. odoo-javascript

@@ -150,7 +150,12 @@ body.o_prism {
         transition: transform .15s ease, border-color .15s ease;
         &:hover { transform: translateY(-2px); }
         &.active { border-color: var(--prism-pick, #7c3aed); box-shadow: 0 0 0 3px color-mix(in srgb, var(--prism-pick, #7c3aed) 30%, transparent); }
+        &::after {      // a soft dark fade under the name, so it reads on light styles too
+            content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 60%; pointer-events: none;
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .45));
+        }
         span {
+            z-index: 1;
             position: absolute; left: 8px; bottom: 6px; font-size: .74rem; font-weight: 700; color: #fff;
             text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
         }

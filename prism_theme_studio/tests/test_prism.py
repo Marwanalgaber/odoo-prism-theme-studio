@@ -29,7 +29,7 @@ class TestPrism(TransactionCase):
         self.alice.with_user(self.alice).write(values)
         self.assertEqual(self.alice._prism_settings(), {
             'enabled': True, 'preset': 'arabesque', 'accent': '#B7791F', 'font': 'serif', 'density': 'compact',
-            'motion': False})
+            'motion': False, 'inside': 'style', 'scheme': 'dark'})          # arabesque is a dark style
         self.assertFalse(self.bob.prism_enabled)            # nobody else changes
         with self.assertRaises(AccessError):
             self.bob.with_user(self.alice).write({'prism_enabled': True})
@@ -41,7 +41,31 @@ class TestPrism(TransactionCase):
 
     def test_settings_travel_with_the_session(self):
         settings = self.alice._prism_settings()
-        self.assertEqual(set(settings), {'enabled', 'preset', 'accent', 'font', 'density', 'motion'})
+        self.assertEqual(set(settings), {'enabled', 'preset', 'accent', 'font', 'density', 'motion', 'inside', 'scheme'})
+
+    def test_dark_styles_make_dark_screens(self):
+        alice = self.alice.with_user(self.alice)
+        alice.write({'prism_enabled': True, 'prism_preset': 'neon'})
+        self.assertEqual(self.alice._prism_scheme(), 'dark')
+        alice.write({'prism_preset': 'paper'})
+        self.assertEqual(self.alice._prism_scheme(), 'light')
+        alice.write({'prism_inside': 'dark'})
+        self.assertEqual(self.alice._prism_scheme(), 'dark')          # the user's own choice wins
+        alice.write({'prism_inside': 'style', 'prism_preset': 'auto'})
+        self.assertEqual(self.alice._prism_scheme(hour=23), 'dark')   # night
+        self.assertEqual(self.alice._prism_scheme(hour=10), 'light')  # day
+        self.assertEqual(self.env['ir.http'].with_user(self.alice).color_scheme(), self.alice._prism_scheme())
+        alice.write({'prism_enabled': False})
+        self.assertEqual(self.env['ir.http'].with_user(self.alice).color_scheme(),
+                         self.env['ir.http'].with_user(self.bob).color_scheme())   # theme off: the site decides
+
+    def test_dark_lists_match(self):
+        from ..models.res_users import DARK_PRESETS, SUN
+        js = open(os.path.join(STATIC, 'js', 'prism_theme.js'), encoding='utf-8').read()
+        self.assertIn('new Set([%s])' % ', '.join('"%s"' % k for k in ['aurora', 'midnight', 'graphite', 'neon', 'arabesque']), js)
+        self.assertEqual(DARK_PRESETS, {'aurora', 'midnight', 'graphite', 'neon', 'arabesque'})
+        js_sun = re.search(r'const SUN = (\[.*?\]);', js).group(1)
+        self.assertEqual(js_sun, '[%s]' % ', '.join('[%d, "%s"]' % pair for pair in SUN))
 
     def test_styles_are_defined_everywhere(self):
         """Every style of the Python list has its CSS and its card in the studio, and the fonts have their CSS."""

@@ -51,7 +51,20 @@ export function sunPreset(date = new Date()) {
     return preset;
 }
 const SWATCHES = ["#7c3aed", "#2563eb", "#0891b2", "#059669", "#65a30d", "#d97706", "#dc2626", "#db2777", "#475569"];
-const DEFAULTS = { enabled: false, preset: "aurora", accent: false, font: "system", density: "comfortable", motion: true };
+const DEFAULTS = { enabled: false, preset: "aurora", accent: false, font: "system", density: "comfortable", motion: true, inside: "style" };
+/** Styles whose screens are dark inside (same list as DARK_PRESETS in Python). */
+const DARK = new Set(["aurora", "midnight", "graphite", "neon", "arabesque"]);
+/** "dark" or "light": the Odoo bundle these settings need (the server decides the same way). */
+export function wantedScheme(settings) {
+    if (!settings.enabled) {
+        return null;        // the site decides
+    }
+    if (settings.inside !== "style") {
+        return settings.inside;
+    }
+    const preset = settings.preset === "auto" ? sunPreset() : settings.preset;
+    return DARK.has(preset) ? "dark" : "light";
+}
 
 /** Put the user's settings on <body>: one class per choice and the accent as a CSS variable. */
 export function applyPrism(settings) {
@@ -103,6 +116,66 @@ window.addEventListener("pointermove", (ev) => {
 }, { passive: true });
 
 const initial = { ...DEFAULTS, ...(session.prism_theme || {}) };
+
+// ---------------------------------------------------------------- light / dark screens
+// Odoo serves its dark bundle when ir.http.color_scheme() says "dark". Our override decides from the user's settings,
+// but Odoo Enterprise (and some themes) decide first from the cookie "color_scheme", so the cookie is kept in step
+// too. The value it had before the theme was switched on is kept and put back when the theme is switched off.
+const PREV_KEY = "prism_prev_color_scheme";
+const RELOAD_KEY = "prism_scheme_reloaded";
+const loadedScheme = () => (document.querySelector("link[href*='assets_web_dark']") ? "dark" : "light");
+function readCookie() {
+    const match = document.cookie.match(/(?:^|; )color_scheme=([^;]*)/);
+    return match ? match[1] : "";
+}
+function writeCookie(value) {
+    document.cookie = value
+        ? `color_scheme=${value}; path=/; max-age=31536000; SameSite=Lax`
+        : "color_scheme=; path=/; max-age=0; SameSite=Lax";
+}
+function storage(kind) {
+    try {
+        return window[kind];
+    } catch {
+        return null;
+    }
+}
+/** Make the cookie match the settings. Returns true when the page shows the other bundle and must be reloaded. */
+export function syncScheme(settings) {
+    const local = storage("localStorage");
+    const wanted = wantedScheme(settings);
+    if (wanted) {
+        if (local && local.getItem(PREV_KEY) === null) {
+            local.setItem(PREV_KEY, readCookie());
+        }
+        if (readCookie() !== wanted) {
+            writeCookie(wanted);
+        }
+        return loadedScheme() !== wanted;
+    }
+    if (local && local.getItem(PREV_KEY) !== null) {     // theme switched off: give the cookie back
+        const previous = local.getItem(PREV_KEY);
+        local.removeItem(PREV_KEY);
+        writeCookie(previous);
+        return loadedScheme() !== (previous === "dark" ? "dark" : (initial.site_scheme || "light"));
+    }
+    return false;
+}
+/** Reload once per browser tab session when the page shows the wrong bundle (guard against a reload loop). */
+function reloadOnce() {
+    const session_ = storage("sessionStorage");
+    if (session_ && session_.getItem(RELOAD_KEY)) {
+        return false;
+    }
+    session_?.setItem(RELOAD_KEY, "1");
+    window.location.reload();
+    return true;
+}
+if (syncScheme(initial)) {
+    reloadOnce();
+} else {
+    storage("sessionStorage")?.removeItem(RELOAD_KEY);
+}
 if (document.body) {
     usePrism(initial);
 } else {
@@ -122,6 +195,10 @@ export class PrismStudio extends Component {
         this.fonts = FONTS;
         this.swatches = SWATCHES;
         this.labels = { on: _t("On"), off: _t("Off"), moving: _t("Moving"), still: _t("Still") };
+        this.insideOptions = [
+            { id: "style", name: _t("Style") }, { id: "light", name: _t("Light") }, { id: "dark", name: _t("Dark") },
+        ];
+        this.reloading = false;
         this.state = useState({ ...initial });
         this._timer = null;
     }
@@ -147,13 +224,21 @@ export class PrismStudio extends Component {
     }
 
     async save() {
-        const { enabled, preset, accent, font, density, motion } = this.state;
+        const { enabled, preset, accent, font, density, motion, inside } = this.state;
         try {
             await this.orm.write("res.users", [user.userId], {
                 prism_enabled: enabled, prism_preset: preset, prism_accent: accent || false,
-                prism_font: font, prism_density: density, prism_motion: motion,
+                prism_font: font, prism_density: density, prism_motion: motion, prism_inside: inside,
             });
-            session.prism_theme = { enabled, preset, accent, font, density, motion };
+            session.prism_theme = { enabled, preset, accent, font, density, motion, inside };
+            // light <-> dark needs the other set of Odoo styles: reload once
+            if (syncScheme(this.state) && !this.reloading) {
+                this.reloading = true;
+                const wanted = wantedScheme(this.state);
+                this.notification.add(wanted === "dark" ? _t("Switching the screens to dark…") : _t("Switching the screens to light…"),
+                    { type: "info" });
+                setTimeout(() => window.location.reload(), 700);
+            }
         } catch (error) {
             this.notification.add(error?.data?.message || _t("Your theme could not be saved."), { type: "danger" });
         }

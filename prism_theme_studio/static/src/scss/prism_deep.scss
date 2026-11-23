@@ -1,0 +1,147 @@
+// Prism Theme Studio, deep layer: the style is carried into every screen. Surfaces become tinted frosted glass (Odoo's own
+// light or dark surface colour, a touch of the style's tint, partly transparent), and the accent colour drives list
+// headers, rows, tabs, status bar, kanban columns, dialogs, menus and the search bar. All under body.o_prism.
+body.o_prism {
+    --prism-tint: var(--prism-default-accent);
+    --prism-view: #{$o-view-background-color};
+    --prism-text: #{$o-main-text-color};
+    --prism-glass: color-mix(in srgb, color-mix(in srgb, var(--prism-view) 90%, var(--prism-tint)) 80%, transparent);
+    --prism-glass-strong: color-mix(in srgb, color-mix(in srgb, var(--prism-view) 92%, var(--prism-tint)) 93%, transparent);
+    --prism-solid: color-mix(in srgb, var(--prism-view) 92%, var(--prism-tint));
+    --prism-head: linear-gradient(180deg, color-mix(in srgb, var(--prism-view) 82%, var(--prism-accent)), color-mix(in srgb, var(--prism-view) 91%, var(--prism-accent)));
+    --prism-hover: color-mix(in srgb, var(--prism-accent) 10%, transparent);
+    --prism-selected: color-mix(in srgb, var(--prism-accent) 18%, transparent);
+    --prism-line: color-mix(in srgb, var(--prism-text) 9%, transparent);
+    --prism-blur: blur(14px) saturate(1.35);
+
+    // ------------------------------------------------------------ frosted surfaces
+    .o_form_view .o_form_sheet,
+    .o_list_view .o_content > .o_list_renderer,
+    .o_pivot_view .o_content, .o_graph_view .o_content .o_graph_renderer, .o_calendar_view .o_calendar_container,
+    .o-mail-Form-chatter .o-mail-Chatter, .o_activity_view .o_activity_view_table {
+        background: var(--prism-glass) !important; backdrop-filter: var(--prism-blur); -webkit-backdrop-filter: var(--prism-blur);
+    }
+    .o_list_renderer .o_list_table, .o_list_renderer .o_list_table tbody, .o_list_renderer .o_list_table tfoot,
+    .o_list_renderer .o_list_table tr, .o_list_renderer .o_list_table td { background-color: transparent; }
+    .o_pivot_view .o_content, .o_graph_view .o_content .o_graph_renderer, .o_calendar_view .o_calendar_container {
+        margin: 12px 14px 14px; border-radius: var(--prism-radius); box-shadow: var(--prism-shadow); border: 1px solid var(--prism-line); padding: 6px;
+    }
+    .o-mail-Form-chatter .o-mail-Chatter { border-radius: var(--prism-radius); margin: 10px; border: 1px solid var(--prism-line); box-shadow: var(--prism-shadow); }
+    .o-mail-Form-chatter { background: transparent !important; border-color: transparent !important; }
+
+    // ------------------------------------------------------------ lists
+    .o_list_renderer .o_list_table thead th, .o_list_renderer .o_list_table thead tr {
+        background: var(--prism-head) !important; color: color-mix(in srgb, var(--prism-text) 82%, var(--prism-accent));
+        font-weight: 700; border-bottom: 2px solid color-mix(in srgb, var(--prism-accent) 35%, transparent) !important;
+    }
+    .o_list_renderer .o_list_table tbody tr.o_data_row:hover > td { background: var(--prism-hover) !important; }
+    .o_list_renderer .o_list_table tbody tr.o_data_row.o_data_row_selected > td,
+    .o_list_renderer .o_list_table tbody tr.o_data_row:has(.o_list_record_selector input:checked) > td { background: var(--prism-selected) !important; }
+    .o_list_renderer .o_list_table tbody tr.o_data_row > td { border-color: var(--prism-line) !important; }
+    .o_list_renderer .o_group_header, .o_list_renderer .o_group_header > th, .o_list_renderer .o_group_header > td {
+        background: color-mix(in srgb, var(--prism-accent) 8%, transparent) !important;
+    }
+    .o_list_renderer .o_group_header .o_group_name {
+        font-weight: 700; color: color-mix(in srgb, var(--prism-text) 75%, var(--prism-accent));
+    }
+    .o_list_renderer .o_list_table tfoot td { background: var(--prism-head) !important; font-weight: 700; }
+
+    // ------------------------------------------------------------ forms
+    .o_form_view .o_form_statusbar { background: transparent !important; border-bottom: 0 !important; padding: 10px 14px 0; }
+    .o_form_view .o_form_statusbar > .o_statusbar_buttons .btn-secondary {
+        background: var(--prism-glass-strong); border: 1px solid var(--prism-line); backdrop-filter: var(--prism-blur);
+        &:hover { border-color: var(--prism-accent); color: var(--prism-accent); }
+    }
+    .o_statusbar_status .o_arrow_button:not(.o_arrow_button_current) { background-color: var(--prism-glass-strong) !important; }
+    .o_horizontal_separator, .o_form_view .o_group .o_horizontal_separator {
+        color: color-mix(in srgb, var(--prism-text) 55%, var(--prism-accent)) !important; font-weight: 700; border: 0 !important;
+        background: linear-gradient(90deg, var(--prism-accent), transparent) bottom left / 64px 2px no-repeat; padding-bottom: 6px;
+    }
+    .o_form_view .o_form_label { color: color-mix(in srgb, var(--prism-text) 72%, var(--prism-accent)); }
+    .o_form_view .oe_title h1 .o_field_widget, .o_form_view .oe_title h1 { color: var(--prism-text); }
+    .o_form_view .oe_button_box .oe_stat_button {
+        border-radius: 12px; &:hover { background: var(--prism-hover) !important; color: var(--prism-accent); }
+    }
+    .o_field_widget a.o_form_uri, .o_form_view .o_field_many2one a { color: color-mix(in srgb, var(--prism-text) 35%, var(--prism-accent)); }
+    .o_field_widget input, .o_field_widget textarea, .o_field_widget select { border-radius: 8px; }
+
+    // notebook tabs as pills
+    .o_notebook .nav-tabs, .o_notebook_headers .nav-tabs {
+        border-bottom: 0 !important; gap: 6px; padding: 4px; border-radius: 12px; background: color-mix(in srgb, var(--prism-text) 5%, transparent);
+        .nav-link {
+            border: 0 !important; border-radius: 9px !important; color: color-mix(in srgb, var(--prism-text) 75%, transparent);
+            margin: 0 !important; font-weight: 600; transition: background .15s ease, color .15s ease;
+            &:hover { background: var(--prism-hover); color: var(--prism-text); }
+            &.active { background: var(--prism-accent) !important; color: #fff !important; box-shadow: 0 4px 12px color-mix(in srgb, var(--prism-accent) 35%, transparent); }
+        }
+    }
+    .nav-tabs .nav-link.active { border-top-color: transparent; }
+
+    // ------------------------------------------------------------ kanban
+    .o_kanban_record:not(.o_kanban_ghost) {
+        background: var(--prism-glass-strong) !important; backdrop-filter: var(--prism-blur); border: 1px solid var(--prism-line) !important;
+    }
+    .o_kanban_group {
+        background: color-mix(in srgb, var(--prism-view) 30%, transparent) !important; border: 1px solid var(--prism-line);
+        backdrop-filter: blur(6px);
+    }
+    .o_kanban_header {
+        background: var(--prism-glass-strong); border-radius: 12px; margin: 6px 6px 8px; padding: 4px 8px;
+        border-top: 3px solid var(--prism-accent); box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+    }
+    .o_kanban_renderer.o_kanban_ungrouped .o_kanban_record:not(.o_kanban_ghost) { margin: 6px; }
+    .o_kanban_record .o_kanban_record_title, .o_kanban_record strong { color: var(--prism-text); }
+
+    // ------------------------------------------------------------ search, control panel, menus, dialogs
+    .o_searchview {
+        background: var(--prism-glass-strong) !important; border: 1px solid var(--prism-line) !important;
+        &:focus-within { box-shadow: 0 0 0 3px var(--prism-hover); }
+    }
+    .o_searchview_facet, .o_searchview .o_facet_values {
+        border-radius: 999px !important; overflow: hidden;
+    }
+    .o_searchview_facet .o_searchview_facet_label { background: var(--prism-accent) !important; color: #fff !important; }
+    .o_cp_switch_buttons .btn.active, .o_switch_view.active { color: var(--prism-accent) !important; background: var(--prism-hover) !important; }
+    .o-dropdown--menu, .dropdown-menu, .o_popover.popover, .o-overlay-item .popover {
+        background: var(--prism-glass-strong) !important; backdrop-filter: var(--prism-blur); -webkit-backdrop-filter: var(--prism-blur);
+        border: 1px solid var(--prism-line) !important;
+        .dropdown-item:hover, .dropdown-item:focus, .o-dropdown-item:hover { background: var(--prism-hover) !important; }
+        .dropdown-item.active, .dropdown-item.selected { background: var(--prism-selected) !important; color: var(--prism-text) !important; }
+    }
+    .modal-content {
+        background: var(--prism-glass-strong) !important; backdrop-filter: var(--prism-blur); border: 1px solid var(--prism-line);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+        .modal-header { background: var(--prism-head); border-bottom: 1px solid var(--prism-line); }
+        .modal-body .o_form_view .o_form_sheet { background: transparent !important; backdrop-filter: none; }
+    }
+    .modal-backdrop.show { backdrop-filter: blur(3px); }
+
+    // ------------------------------------------------------------ small things
+    .progress-bar, .o_progressbar .o_progress .o_progressbar_value { background-color: var(--prism-accent) !important; }
+    .badge.text-bg-primary, .badge.bg-primary {
+        background-color: color-mix(in srgb, var(--prism-accent) 24%, transparent) !important;
+        color: color-mix(in srgb, var(--prism-accent) 62%, var(--prism-text)) !important; font-weight: 700;
+        border: 1px solid color-mix(in srgb, var(--prism-accent) 40%, transparent);
+    }
+    .o_pager .btn:hover, .o_pager_value:hover { color: var(--prism-accent); }
+    .o_form_view .o_field_boolean .form-check-input:checked, .form-switch .form-check-input:checked {
+        background-color: var(--prism-accent); border-color: var(--prism-accent);
+    }
+    ::selection { background: color-mix(in srgb, var(--prism-accent) 30%, transparent); }
+    // scrollbars: thin, accent thumb, no light track (also the tab strip of notebooks)
+    * { scrollbar-color: color-mix(in srgb, var(--prism-accent) 40%, transparent) transparent; }
+    .o_notebook_headers, .o_notebook .nav-tabs { scrollbar-width: thin; }
+    *::-webkit-scrollbar-track, *::-webkit-scrollbar-corner { background: transparent; }
+    *::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--prism-accent) 35%, transparent); border-radius: 999px; }
+
+    // per-style tints (a little of the style's colour in every surface)
+    &.o_prism_p_mesh { --prism-tint: #f0abfc; }
+    &.o_prism_p_dunes { --prism-tint: #f59e0b; }
+    &.o_prism_p_midnight { --prism-tint: #6366f1; }
+    &.o_prism_p_glass { --prism-tint: #38bdf8; }
+    &.o_prism_p_paper { --prism-tint: #93c5fd; }
+    &.o_prism_p_arabesque { --prism-tint: #10b981; }
+    &.o_prism_p_sunset { --prism-tint: #fb7185; }
+    &.o_prism_p_graphite { --prism-tint: #a1a1aa; }
+    &.o_prism_p_neon { --prism-tint: #e879f9; }
+}
