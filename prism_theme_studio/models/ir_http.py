@@ -13,9 +13,9 @@ class IrHttp(models.AbstractModel):
         return result
 
     def color_scheme(self):
-        """With the theme on, the user's style decides light or dark screens (Odoo's dark bundle); otherwise the site
-        decides as before."""
+        """With the theme on (by the user or by the company), the style decides light or dark screens (Odoo's dark
+        bundle); otherwise the site decides as before."""
         user = self.env.user
-        if user and not user.share and user.prism_enabled:
+        if user and not user.share and user._prism_look()[0]['enabled']:
             return user._prism_scheme()
         return super().color_scheme()

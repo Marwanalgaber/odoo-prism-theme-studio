@@ -13,70 +13,124 @@
                             <div class="fw-bold">Your look</div>
                         </div>
                         <div class="form-check form-switch m-0">
-                            <input class="form-check-input" type="checkbox" role="switch" id="o_prism_enabled"
+                            <input class="form-check-input" type="checkbox" role="switch" id="o_prism_enabled" t-att-disabled="locked"
                                    t-att-checked="state.enabled" t-on-change="(ev) => this.set({ enabled: ev.target.checked })"/>
                             <label class="form-check-label small" for="o_prism_enabled" t-esc="state.enabled ? labels.on : labels.off"/>
                         </div>
                     </div>
+                    <div t-if="sourceNote" class="o_prism_note"><i class="fa fa-building-o me-1"/><t t-esc="sourceNote"/></div>
                     <div t-if="!state.enabled" class="o_prism_off_note">
                         Switch it on to use the theme. Only your own screens change.
                     </div>
 
                     <div class="o_prism_label">Style</div>
-                    <div class="o_prism_grid">
+                    <div t-attf-class="o_prism_grid {{locked ? 'o_prism_disabled' : ''}}">
                         <t t-foreach="presets" t-as="p" t-key="p.id">
                             <button t-attf-class="o_prism_card {{state.preset === p.id ? 'active' : ''}}" t-att-style="'background: ' + p.thumb"
-                                    t-on-click="() => this.set({ preset: p.id, enabled: true })" t-att-title="p.name">
+                                    t-att-disabled="locked" t-on-click="() => this.set({ preset: p.id, enabled: true })" t-att-title="p.name">
                                 <i t-if="state.preset === p.id" class="fa fa-check"/>
                                 <small t-if="p.id === 'auto'" class="o_prism_now">now: <t t-esc="sunNow"/></small>
+                                <i t-if="p.id === 'photo'" class="fa fa-picture-o o_prism_photo_icon"/>
                                 <span t-esc="p.name"/>
                             </button>
                         </t>
                     </div>
+                    <div t-if="!locked" class="d-flex align-items-center gap-2 mt-2 o_prism_photo_row">
+                        <label class="btn btn-sm btn-secondary m-0">
+                            <i t-attf-class="fa {{state.uploading ? 'fa-spinner fa-spin' : 'fa-upload'}} me-1"/>
+                            <t t-if="state.has_own_photo">Change my photo</t><t t-else="">Use my own photo</t>
+                            <input type="file" accept="image/*" class="d-none" t-on-change="onPhoto"/>
+                        </label>
+                        <button t-if="state.has_own_photo" class="btn btn-sm btn-link px-1" t-on-click="removePhoto">Remove</button>
+                        <span class="small text-muted">Colours are taken from the photo.</span>
+                    </div>
 
                     <div class="o_prism_label">Accent colour</div>
-                    <div class="o_prism_swatches">
+                    <div t-attf-class="o_prism_swatches {{locked ? 'o_prism_disabled' : ''}}">
                         <button t-attf-class="o_prism_swatch o_prism_auto {{!state.accent ? 'active' : ''}}" title="Colour of the style"
-                                t-on-click="() => this.set({ accent: false })"/>
+                                t-att-disabled="locked" t-on-click="() => this.set({ accent: false })"/>
                         <t t-foreach="swatches" t-as="color" t-key="color">
                             <button t-attf-class="o_prism_swatch {{state.accent === color ? 'active' : ''}}" t-att-style="'background: ' + color"
-                                    t-att-title="color" t-on-click="() => this.set({ accent: color })"/>
+                                    t-att-disabled="locked" t-att-title="color" t-on-click="() => this.set({ accent: color })"/>
                         </t>
-                        <input type="color" class="o_prism_color_input" title="Any colour" t-att-value="pick" t-on-change="onColorInput"/>
+                        <input type="color" class="o_prism_color_input" title="Any colour" t-att-disabled="locked" t-att-value="pick" t-on-change="onColorInput"/>
                     </div>
 
                     <div class="o_prism_label">Font</div>
-                    <select class="form-select form-select-sm" t-on-change="(ev) => this.set({ font: ev.target.value })">
+                    <select class="form-select form-select-sm" t-on-change="(ev) => this.set({ font: ev.target.value }, { look: false })">
                         <t t-foreach="fonts" t-as="f" t-key="f.id">
                             <option t-att-value="f.id" t-att-selected="state.font === f.id" t-esc="f.name"/>
                         </t>
                     </select>
 
-                    <div class="d-flex align-items-center justify-content-between mt-3 gap-2 flex-wrap">
+                    <div class="o_prism_row">
                         <div>
-                            <div class="o_prism_label mt-0">Spacing</div>
+                            <div class="o_prism_label">Spacing</div>
                             <div class="o_prism_segment">
-                                <button t-att-class="state.density === 'comfortable' ? 'active' : ''" t-on-click="() => this.set({ density: 'comfortable' })">Comfortable</button>
-                                <button t-att-class="state.density === 'compact' ? 'active' : ''" t-on-click="() => this.set({ density: 'compact' })">Compact</button>
+                                <button t-att-class="state.density === 'comfortable' ? 'active' : ''" t-on-click="() => this.set({ density: 'comfortable' }, { look: false })">Comfortable</button>
+                                <button t-att-class="state.density === 'compact' ? 'active' : ''" t-on-click="() => this.set({ density: 'compact' }, { look: false })">Compact</button>
                             </div>
                         </div>
                         <div>
-                            <div class="o_prism_label mt-0">Animation</div>
+                            <div class="o_prism_label">Animation</div>
                             <div class="form-check form-switch m-0">
                                 <input class="form-check-input" type="checkbox" role="switch" id="o_prism_motion"
-                                       t-att-checked="state.motion" t-on-change="(ev) => this.set({ motion: ev.target.checked })"/>
+                                       t-att-checked="state.motion" t-on-change="(ev) => this.set({ motion: ev.target.checked }, { look: false })"/>
                                 <label class="form-check-label small" for="o_prism_motion" t-esc="state.motion ? labels.moving : labels.still"/>
                             </div>
                         </div>
                     </div>
-                    <div class="o_prism_label">Screens inside</div>
-                    <div class="o_prism_segment">
-                        <t t-foreach="insideOptions" t-as="o" t-key="o.id">
-                            <button t-att-class="state.inside === o.id ? 'active' : ''" t-on-click="() => this.set({ inside: o.id })" t-esc="o.name"/>
-                        </t>
+
+                    <div class="o_prism_row">
+                        <div>
+                            <div class="o_prism_label">Screens inside</div>
+                            <div class="o_prism_segment">
+                                <t t-foreach="insideOptions" t-as="o" t-key="o.id">
+                                    <button t-att-class="state.inside === o.id ? 'active' : ''" t-on-click="() => this.set({ inside: o.id }, { look: false })" t-esc="o.name"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="o_prism_label">Effects</div>
+                            <div class="o_prism_segment" title="Auto turns the glass and animation down on a slow computer">
+                                <t t-foreach="effectOptions" t-as="o" t-key="o.id">
+                                    <button t-att-class="state.effects === o.id ? 'active' : ''" t-on-click="() => this.set({ effects: o.id }, { look: false })" t-esc="o.name"/>
+                                </t>
+                            </div>
+                        </div>
                     </div>
                     <div class="o_prism_off_note">Dark styles show the screens in dark mode. The page reloads once when this changes.</div>
-                    <div class="d-flex justify-content-end mt-3">
+
+                    <div class="o_prism_row">
+                        <div>
+                            <div class="o_prism_label">Menu</div>
+                            <div class="o_prism_segment">
+                                <t t-foreach="layoutOptions" t-as="o" t-key="o.id">
+                                    <button t-att-class="state.layout === o.id ? 'active' : ''" t-on-click="() => this.set({ layout: o.id }, { look: false })" t-esc="o.name"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="o_prism_label">Occasions</div>
+                            <div class="form-check form-switch m-0">
+                                <input class="form-check-input" type="checkbox" role="switch" id="o_prism_occasions"
+                                       t-att-checked="state.occasions" t-on-change="(ev) => this.set({ occasions: ev.target.checked }, { look: false })"/>
+                                <label class="form-check-label small" for="o_prism_occasions">Today: <t t-esc="occasionToday"/></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <span class="small text-muted">Preview an occasion:</span>
+                        <select class="form-select form-select-sm w-auto" t-on-change="onPreview">
+                            <option value="">-</option>
+                            <t t-foreach="occasions" t-as="o" t-key="o.id">
+                                <option t-att-value="o.id" t-att-selected="state.preview === o.id" t-esc="o.name"/>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <button class="btn btn-sm btn-link px-0" t-on-click="openHome"><i class="fa fa-th-large me-1"/>My home</button>
                         <button class="btn btn-sm btn-link px-0" t-on-click="reset"><i class="fa fa-undo me-1"/>Back to default</button>
                     </div>
                 </div>

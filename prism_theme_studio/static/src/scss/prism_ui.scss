@@ -41,7 +41,9 @@ body.o_prism {
         background: var(--prism-nav-bg) !important; border-bottom: 1px solid var(--prism-nav-line) !important;
         backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: none !important;
         &, .o_menu_brand, .o_menu_sections .o_nav_entry, .o_menu_sections .dropdown-toggle, .o_menu_systray .o_nav_entry,
-        .o_menu_systray > div > button, .o_menu_systray .dropdown-toggle, .o_menu_toggle, .fa:not(.o_prism_systray_icon), .oi { color: var(--prism-nav-text) !important; }
+        .o_menu_systray > div > button, .o_menu_systray .dropdown-toggle, .o_menu_toggle, .fa:not(.o_prism_systray_icon), .oi,
+        .o_menu_systray a, .o_menu_systray span:not(.badge):not(.o_prism_systray_icon), .o_switch_company_menu,
+        .o_menu_sections a { color: var(--prism-nav-text) !important; }
         .o_menu_sections .o_nav_entry:hover, .o_menu_sections .dropdown-toggle:hover, .o_menu_systray button:hover {
             background: color-mix(in srgb, var(--prism-nav-text) 12%, transparent) !important;
         }

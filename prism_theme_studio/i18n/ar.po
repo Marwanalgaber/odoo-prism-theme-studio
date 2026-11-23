@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0-20261102\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-23 12:17+0000\n"
-"PO-Revision-Date: 2026-11-23 12:17+0000\n"
+"POT-Creation-Date: 2026-11-23 12:51+0000\n"
+"PO-Revision-Date: 2026-11-23 12:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar_001\n"
@@ -12,6 +12,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_company__prism_default_accent
+#: model:ir.model.fields,help:prism_theme_studio.field_res_config_settings__prism_default_accent
+msgid "#RRGGBB, e.g. from the logo."
+msgstr "‎#RRGGBB، مثلاً من الشعار."
 
 #. module: prism_theme_studio
 #: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_accent
@@ -22,8 +28,15 @@ msgstr "‎#RRGGBB. اتركه فارغاً لاستخدام لون النمط."
 #. odoo-javascript
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_accent
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
 msgid "Accent colour"
 msgstr "لون التمييز"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "All apps"
+msgstr "كل التطبيقات"
 
 #. module: prism_theme_studio
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_inside__dark
@@ -54,10 +67,53 @@ msgstr "أي لون"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Apps"
+msgstr "التطبيقات"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__arabic_classic
+msgid "Arabic classic"
+msgstr "عربي كلاسيكي"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__arabic_modern
+msgid "Arabic modern"
+msgstr "عربي حديث"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__aurora
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__aurora
 msgid "Aurora"
 msgstr "الشفق"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid "Auto"
+msgstr "تلقائي"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Auto turns the glass and animation down on a slow computer"
+msgstr "التلقائي يخفف الزجاج والحركة على الجهاز البطيء"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_effects__auto
+msgid "Automatic"
+msgstr "تلقائي"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_effects
+msgid "Automatic: glass and animation are turned down on a slow computer."
+msgstr "تلقائي: يتم تخفيف الزجاج والحركة على الجهاز البطيء."
 
 #. module: prism_theme_studio
 #. odoo-javascript
@@ -68,8 +124,26 @@ msgstr "العودة للافتراضي"
 #. module: prism_theme_studio
 #. odoo-javascript
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Change my photo"
+msgstr "تغيير صورتي"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid "Choose a picture (JPEG, PNG or WebP)."
+msgstr "اختر صورة (JPEG أو PNG أو WebP)."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
 msgid "Colour of the style"
 msgstr "لون النمط"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Colours are taken from the photo."
+msgstr "تُؤخذ الألوان من الصورة."
 
 #. module: prism_theme_studio
 #. odoo-javascript
@@ -86,8 +160,45 @@ msgid "Compact"
 msgstr "مضغوط"
 
 #. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_default_accent
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_default_accent
+msgid "Company accent colour"
+msgstr "لون تمييز الشركة"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_background
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_background
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "Company background photo"
+msgstr "صورة خلفية الشركة"
+
+#. module: prism_theme_studio
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "Company look"
+msgstr "مظهر الشركة"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_default_enabled
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_default_enabled
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "Company look for all users"
+msgstr "مظهر الشركة لكل المستخدمين"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_photo_dark
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_photo_dark
+msgid "Company photo is dark"
+msgstr "صورة الشركة داكنة"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_default_preset
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_default_preset
+msgid "Company style"
+msgstr "نمط الشركة"
+
+#. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Dark"
 msgstr "داكن"
 
@@ -110,25 +221,85 @@ msgstr ""
 "دائماً."
 
 #. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_occasions
+msgid ""
+"Decorations for Ramadan, the Eids, Founding Day, National Day and winter."
+msgstr "زينة رمضان والعيدين ويوم التأسيس واليوم الوطني والشتاء."
+
+#. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__dunes
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__dunes
 msgid "Desert Dunes"
 msgstr "كثبان الصحراء"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__serif
 msgid "Editorial serif"
 msgstr "خط تحريري مذيّل"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_effects
+msgid "Effects"
+msgstr "المؤثرات"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Eid"
+msgstr "العيد"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Eid Mubarak"
+msgstr "عيد مبارك"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__arabesque
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__arabesque
 msgid "Emerald Arabesque"
 msgstr "الأرابيسك الزمردي"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_company__prism_lock
+#: model:ir.model.fields,help:prism_theme_studio.field_res_config_settings__prism_lock
+msgid "Every user of the company has the company look and cannot change it."
+msgstr "كل مستخدمي الشركة يحصلون على مظهر الشركة ولا يمكنهم تغييره."
+
+#. module: prism_theme_studio
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid ""
+"Every user of the company has the company style and colour and cannot change"
+" them (font, spacing, effects and menu stay personal)."
+msgstr ""
+"كل مستخدمي الشركة يحصلون على نمط ولون الشركة ولا يمكنهم تغييرهما (الخط "
+"والمسافات والمؤثرات والقائمة تبقى شخصية)."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid "Fast"
+msgstr "سريع"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Find an app and press Enter…"
+msgstr "ابحث عن تطبيق واضغط Enter…"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Find an app…"
+msgstr "ابحث عن تطبيق…"
 
 #. module: prism_theme_studio
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_inside__style
@@ -137,7 +308,8 @@ msgstr "حسب النمط"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__auto
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__auto
 msgid "Follow the sun"
 msgstr "مع الشمس"
@@ -150,76 +322,244 @@ msgstr "الخط"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Founding Day"
+msgstr "يوم التأسيس"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_effects__full
+msgid "Full"
+msgstr "كامل"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__glass
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__glass
 msgid "Glass Ocean"
 msgstr "محيط زجاجي"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_sidebar.js:0
+msgid "Good afternoon"
+msgstr "مساء الخير"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_sidebar.js:0
+msgid "Good evening"
+msgstr "مساء الخير"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_sidebar.js:0
+msgid "Good morning"
+msgstr "صباح الخير"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_sidebar.js:0
+msgid "Good night"
+msgstr "تصبح على خير"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__graphite
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__graphite
 msgid "Graphite"
 msgstr "جرافيت"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Happy Founding Day"
+msgstr "يوم تأسيس سعيد"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Happy National Day"
+msgstr "يوم وطني سعيد"
+
+#. module: prism_theme_studio
+#: model:ir.actions.client,name:prism_theme_studio.action_prism_home
+msgid "Home"
+msgstr "الرئيسية"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__humanist
 msgid "Humanist sans"
 msgstr "خط إنساني"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Light"
 msgstr "فاتح"
 
 #. module: prism_theme_studio
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_effects__lite
+msgid "Light (fast)"
+msgstr "خفيف (سريع)"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_lock
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_lock
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "Lock the look"
+msgstr "تثبيت المظهر"
+
+#. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_layout
+msgid "Menu"
+msgstr "القائمة"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__mesh
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__mesh
 msgid "Mesh Bloom"
 msgstr "تفتّح الألوان"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__midnight
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__midnight
 msgid "Midnight Sky"
 msgstr "سماء منتصف الليل"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Moving"
 msgstr "متحركة"
 
 #. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_background
+msgid "My background photo"
+msgstr "صورة خلفيتي"
+
+#. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "My home"
+msgstr "شاشتي الرئيسية"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__photo
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__photo
+msgid "My photo"
+msgstr "صورتي"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "National Day"
+msgstr "اليوم الوطني"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__neon
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__neon
 msgid "Neon Grid"
 msgstr "شبكة النيون"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "No app found."
+msgstr "لا يوجد تطبيق."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_occasions
+msgid "Occasions"
+msgstr "المناسبات"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Off"
 msgstr "متوقف"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "On"
 msgstr "مفعّل"
 
 #. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_customized
+msgid "Own look"
+msgstr "مظهر خاص"
+
+#. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__paper
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__paper
 msgid "Paper Studio"
 msgstr "ورق المرسم"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_photo_dark
+msgid "Photo is dark"
+msgstr "الصورة داكنة"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Pin"
+msgstr "تثبيت"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Pin to the top"
+msgstr "تثبيت في الأعلى"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Pinned"
+msgstr "المثبتة"
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_pins
+msgid "Pinned apps"
+msgstr "التطبيقات المثبتة"
+
+#. module: prism_theme_studio
+#. odoo-python
+#: code:addons/prism_theme_studio/models/res_users.py:0
+msgid "Pinned apps must be a list of menu ids."
+msgstr "يجب أن تكون التطبيقات المثبتة قائمة أرقام قوائم."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Preview an occasion:"
+msgstr "معاينة مناسبة:"
+
+#. module: prism_theme_studio
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "Prism Theme"
+msgstr "ثيم بريزم"
 
 #. module: prism_theme_studio
 #. odoo-javascript
@@ -228,13 +568,38 @@ msgid "Prism Theme Studio"
 msgstr "استوديو ثيم بريزم"
 
 #. module: prism_theme_studio
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_company__prism_login
+#: model:ir.model.fields,field_description:prism_theme_studio.field_res_config_settings__prism_login
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "Prism on the login page"
+msgstr "بريزم في صفحة الدخول"
+
+#. module: prism_theme_studio
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_enabled
 msgid "Prism theme"
 msgstr "ثيم بريزم"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Ramadan"
+msgstr "رمضان"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Ramadan Kareem"
+msgstr "رمضان كريم"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Remove"
+msgstr "إزالة"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__rounded
 msgid "Rounded"
 msgstr "مستدير"
@@ -248,6 +613,13 @@ msgstr "الشاشات من الداخل"
 
 #. module: prism_theme_studio
 #. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_layout__sidebar
+msgid "Sidebar"
+msgstr "شريط جانبي"
+
+#. module: prism_theme_studio
+#. odoo-javascript
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_density
 msgid "Spacing"
@@ -255,20 +627,22 @@ msgstr "المسافات"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Still"
 msgstr "ثابتة"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 #: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
 msgid "Style"
 msgstr "النمط"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_company__prism_default_preset__sunset
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_preset__sunset
 msgid "Sunset Horizon"
 msgstr "أفق الغروب"
@@ -281,35 +655,71 @@ msgstr "فعّله لاستخدام الثيم. تتغير شاشاتك أنت �
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Switching the screens to dark…"
 msgstr "جارٍ تحويل الشاشات إلى الوضع الداكن…"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Switching the screens to light…"
 msgstr "جارٍ تحويل الشاشات إلى الوضع الفاتح…"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__system
 msgid "System"
 msgstr "النظام"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
 #: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_font__mono
 msgid "Technical mono"
 msgstr "خط تقني ثابت العرض"
 
 #. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_pins
+msgid "Technical: ids of the menus pinned in the sidebar."
+msgstr "تقني: أرقام القوائم المثبتة في الشريط الجانبي."
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_photo_dark
+msgid "Technical: set when the photo is uploaded."
+msgstr "تقني: يُحدد عند رفع الصورة."
+
+#. module: prism_theme_studio
 #. odoo-python
+#: code:addons/prism_theme_studio/models/res_company.py:0
 #: code:addons/prism_theme_studio/models/res_users.py:0
 msgid "The accent colour must look like #1A2B3C."
 msgstr "يجب أن يكون لون التمييز بالشكل ‎#1A2B3C."
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_company__prism_login
+#: model:ir.model.fields,help:prism_theme_studio.field_res_config_settings__prism_login
+msgid "The login page shows the company style."
+msgstr "صفحة الدخول تعرض نمط الشركة."
+
+#. module: prism_theme_studio
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "The photo is dark"
+msgstr "الصورة داكنة"
+
+#. module: prism_theme_studio
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid "The sign-in page shows the company style."
+msgstr "صفحة تسجيل الدخول تعرض نمط الشركة."
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_customized
+msgid ""
+"The user chose his own look (company defaults no longer apply to him, unless"
+" the company locks the look)."
+msgstr ""
+"اختار المستخدم مظهره الخاص (لا تنطبق عليه إعدادات الشركة إلا إذا ثبّتت "
+"الشركة المظهر)."
 
 #. module: prism_theme_studio
 #: model:ir.model.fields,field_description:prism_theme_studio.field_res_users__prism_font
@@ -328,9 +738,89 @@ msgid "Theme style"
 msgstr "نمط الثيم"
 
 #. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid "This picture could not be used."
+msgstr "تعذّر استخدام هذه الصورة."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Today:"
+msgstr "اليوم:"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+#: model:ir.model.fields.selection,name:prism_theme_studio.selection__res_users__prism_layout__top
+msgid "Top menu"
+msgstr "قائمة علوية"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_sidebar.xml:0
+msgid "Unpin"
+msgstr "إلغاء التثبيت"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/xml/prism_theme.xml:0
+msgid "Use my own photo"
+msgstr "استخدام صورتي"
+
+#. module: prism_theme_studio
 #: model:ir.model.fields,help:prism_theme_studio.field_res_users__prism_enabled
 msgid "Use the Prism theme for this user. Every user decides for himself."
 msgstr "استخدام ثيم بريزم لهذا المستخدم. كل مستخدم يقرر لنفسه."
+
+#. module: prism_theme_studio
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid ""
+"Used by the style \"My photo\" for users without their own photo. Mark it "
+"dark if the picture is dark, so the screens are dark too."
+msgstr ""
+"يستخدمها نمط \"صورتي\" للمستخدمين الذين ليس لديهم صورة خاصة. حددها داكنة إذا"
+" كانت الصورة داكنة لتكون الشاشات داكنة أيضاً."
+
+#. module: prism_theme_studio
+#: model:ir.model.fields,help:prism_theme_studio.field_res_company__prism_default_enabled
+#: model:ir.model.fields,help:prism_theme_studio.field_res_config_settings__prism_default_enabled
+#: model_terms:ir.ui.view,arch_db:prism_theme_studio.res_config_settings_view_form
+msgid ""
+"Users who have not chosen their own look get this one. They can still change"
+" it, unless it is locked."
+msgstr ""
+"المستخدمون الذين لم يختاروا مظهراً خاصاً يحصلون على هذا المظهر، ويمكنهم "
+"تغييره ما لم يكن مثبتاً."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Warm winter days"
+msgstr "أيام شتاء دافئة"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_core.js:0
+msgid "Winter"
+msgstr "الشتاء"
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid ""
+"You are using your company's look. Change anything to make it your own."
+msgstr "أنت تستخدم مظهر شركتك. غيّر أي شيء ليصبح مظهرك الخاص."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid ""
+"Your company sets the style and colour for everybody. You can still change "
+"the font, spacing, effects and menu."
+msgstr ""
+"شركتك تحدد النمط واللون للجميع. ما زال بإمكانك تغيير الخط والمسافات "
+"والمؤثرات والقائمة."
 
 #. module: prism_theme_studio
 #. odoo-javascript
@@ -340,9 +830,15 @@ msgstr "مظهرك"
 
 #. module: prism_theme_studio
 #. odoo-javascript
-#: code:addons/prism_theme_studio/static/src/js/prism_theme.js:0
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
 msgid "Your theme could not be saved."
 msgstr "تعذّر حفظ الثيم الخاص بك."
+
+#. module: prism_theme_studio
+#. odoo-javascript
+#: code:addons/prism_theme_studio/static/src/js/prism_studio.js:0
+msgid "none today"
+msgstr "لا شيء اليوم"
 
 #. module: prism_theme_studio
 #. odoo-javascript

@@ -1,0 +1,192 @@
+// Prism Theme Studio, extras: photo style, Arabic fonts, light mode for slow computers, sidebar, home screen,
+// occasions, studio additions and right-to-left fixes.
+
+body.o_prism {
+    // ------------------------------------------------------------ photo style: the picture, softly blurred
+    &.o_prism_p_photo {
+        --prism-tint: var(--prism-photo-tint, #64748b);
+        &::before {
+            background: var(--prism-photo) center / cover no-repeat !important; opacity: 1 !important; animation: none !important;
+            inset: -28px !important; filter: blur(6px) saturate(1.08) brightness(.94); transform: none !important;
+        }
+    }
+
+    // ------------------------------------------------------------ Arabic fonts (fonts already on the computer)
+    &.o_prism_f_arabic_modern { --prism-font-stack: "Segoe UI", "Noto Kufi Arabic", "Dubai", "Geeza Pro", Tahoma, Arial, sans-serif; }
+    &.o_prism_f_arabic_classic {
+        --prism-font-stack: "Noto Naskh Arabic", "Traditional Arabic", "Simplified Arabic", "Geeza Pro", "Times New Roman", serif;
+        font-size: 1.04em;
+    }
+
+    // ------------------------------------------------------------ light mode for slow computers: no blur, no motion
+    &.o_prism_lite {
+        &::before, &::after { animation: none !important; }
+        &::after { display: none; }
+        * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+        --prism-glass: var(--prism-solid);
+        --prism-glass-strong: var(--prism-solid);
+        --prism-panel: var(--prism-solid);
+        .o_kanban_record:hover, .btn-primary:hover::after { transform: none; animation: none; }
+    }
+
+    // ------------------------------------------------------------ sidebar menu
+    &.o_prism_sidebar {
+        --prism-sb: 64px;
+        &.o_prism_sidebar_open { --prism-sb: 232px; }
+        > .o_navbar, > header, > .o_action_manager { margin-inline-start: var(--prism-sb); transition: margin .2s ease; }
+        .o_main_navbar .o_navbar_apps_menu, .o_main_navbar .o_menu_toggle { display: none !important; }
+    }
+    .o_prism_sidebar_nav {
+        position: fixed; inset-block: 0; inset-inline-start: 0; width: 64px; z-index: 3; display: flex; flex-direction: column;
+        padding: 10px 8px; gap: 6px; background: var(--prism-nav-bg); border-inline-end: 1px solid var(--prism-nav-line);
+        backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4); color: var(--prism-nav-text);
+        transition: width .2s ease;
+        &.o_open { width: 232px; }
+        .o_prism_sb_top { display: flex; gap: 6px; justify-content: space-between; }
+        &:not(.o_open) .o_prism_sb_top { flex-direction: column; align-items: center; }
+        .o_prism_sb_btn {
+            width: 40px; height: 34px; border: 0; border-radius: 10px; background: color-mix(in srgb, var(--prism-nav-text) 10%, transparent);
+            color: inherit; &:hover { background: color-mix(in srgb, var(--prism-nav-text) 18%, transparent); }
+        }
+        .o_prism_sb_search { background: color-mix(in srgb, var(--prism-nav-text) 10%, transparent); border: 0; color: inherit; border-radius: 10px;
+            &::placeholder { color: color-mix(in srgb, var(--prism-nav-text) 60%, transparent); } }
+        .o_prism_sb_list { flex: 1 1 auto; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 2px; scrollbar-width: thin; }
+        .o_prism_sb_title { font-size: .64rem; text-transform: uppercase; letter-spacing: .12em; opacity: .6; margin: 10px 8px 4px; font-weight: 700; }
+        .o_prism_sb_sep { height: 1px; margin: 6px 8px; background: var(--prism-nav-line); }
+        .o_prism_sb_item {
+            position: relative; display: flex; align-items: center; gap: 10px; padding: 6px; border-radius: 12px; color: inherit !important;
+            text-decoration: none; transition: background .15s ease;
+            &:hover { background: color-mix(in srgb, var(--prism-nav-text) 12%, transparent); }
+            &.active { background: color-mix(in srgb, var(--prism-accent) 35%, transparent); box-shadow: inset 3px 0 0 var(--prism-accent); }
+        }
+        &:not(.o_open) .o_prism_sb_item { justify-content: center; }
+        .o_prism_sb_name { flex: 1 1 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .86rem; font-weight: 600; }
+        .o_prism_sb_pin { opacity: 0; font-size: .75rem; padding: 4px; transform: rotate(45deg); &.o_pinned { opacity: .8; transform: none; } }
+        .o_prism_sb_item:hover .o_prism_sb_pin { opacity: .8; }
+    }
+    .o_prism_app_icon {
+        flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; overflow: hidden; display: inline-flex; align-items: center;
+        justify-content: center; box-shadow: 0 2px 6px rgba(0, 0, 0, .18);
+        img { width: 100%; height: 100%; object-fit: cover; }
+        .o_prism_app_glyph { width: 100%; height: 100%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    }
+
+    // ------------------------------------------------------------ home screen
+    .o_prism_home { overflow: auto; height: 100%; }
+    .o_prism_home_inner { max-width: 1100px; margin: 0 auto; padding: 28px 22px 40px; }
+    .o_prism_home_hero {
+        display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 26px 28px; margin-bottom: 18px;
+        border-radius: 22px; background: var(--prism-glass); backdrop-filter: var(--prism-blur); border: 1px solid var(--prism-line);
+        box-shadow: var(--prism-shadow);
+    }
+    .o_prism_home_greet { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -.02em; }
+    .o_prism_home_date { color: color-mix(in srgb, var(--prism-text) 65%, transparent); margin-top: 4px; }
+    .o_prism_home_occasion {
+        display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 999px; font-weight: 700; font-size: .85rem;
+        background: color-mix(in srgb, var(--prism-accent) 20%, transparent); color: color-mix(in srgb, var(--prism-accent) 60%, var(--prism-text));
+    }
+    .o_prism_home_clock {
+        font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums;
+        background: linear-gradient(135deg, var(--prism-accent), color-mix(in srgb, var(--prism-accent) 40%, var(--prism-text)));
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .o_prism_home_search {
+        max-width: 520px; margin: 0 auto 22px; border-radius: 999px; padding: 10px 20px; background: var(--prism-glass-strong);
+        border: 1px solid var(--prism-line); backdrop-filter: var(--prism-blur);
+        &:focus { border-color: var(--prism-accent); box-shadow: 0 0 0 4px var(--prism-hover); }
+    }
+    .o_prism_home_title {
+        font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; margin: 8px 4px 10px; color: var(--prism-on-bg);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+    }
+    .o_prism_home_grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .o_prism_tile {
+        position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 8px 14px; border-radius: 18px;
+        border: 1px solid var(--prism-line); background: var(--prism-glass-strong); backdrop-filter: var(--prism-blur); color: var(--prism-text);
+        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; cursor: pointer;
+        .o_prism_app_icon { width: 54px; height: 54px; border-radius: 16px; }
+        .o_prism_app_glyph { font-size: 1.6rem; }
+        &:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0, 0, 0, .18); border-color: var(--prism-accent); }
+    }
+    .o_prism_home_grid.o_pins .o_prism_tile { background: linear-gradient(160deg, color-mix(in srgb, var(--prism-accent) 22%, var(--prism-view)), var(--prism-glass-strong)); }
+    .o_prism_tile_name { font-size: .84rem; font-weight: 700; text-align: center; line-height: 1.2; }
+    .o_prism_tile_pin { position: absolute; top: 8px; inset-inline-end: 9px; opacity: 0; font-size: .75rem; color: var(--prism-accent);
+        &.o_pinned { opacity: .9; } }
+    .o_prism_tile:hover .o_prism_tile_pin { opacity: .9; }
+    .o_prism_home_empty { color: var(--prism-on-bg); text-align: center; padding: 20px; }
+}
+// the home screen also looks right without the theme
+body:not(.o_prism) .o_prism_home {
+    .o_prism_home_inner { max-width: 1100px; margin: 0 auto; padding: 28px 22px; }
+    .o_prism_home_hero { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px; }
+    .o_prism_home_greet { font-size: 2rem; font-weight: 800; }
+    .o_prism_home_clock { font-size: 3rem; font-weight: 800; }
+    .o_prism_home_search { max-width: 520px; margin: 0 auto 22px; border-radius: 999px; }
+    .o_prism_home_grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; margin-bottom: 18px; }
+    .o_prism_tile { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px; border-radius: 16px; border: 1px solid rgba(0, 0, 0, .08); background: transparent; position: relative; }
+    .o_prism_app_icon { width: 54px; height: 54px; border-radius: 14px; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; img { width: 100%; height: 100%; } }
+    .o_prism_app_glyph { width: 100%; height: 100%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+    .o_prism_tile_pin { position: absolute; top: 8px; right: 9px; opacity: .4; }
+    .o_prism_home_title { font-weight: 800; text-transform: uppercase; font-size: .72rem; letter-spacing: .14em; margin: 8px 4px; }
+}
+
+// ---------------------------------------------------------------- occasions (decorations, never in the way)
+.o_prism_occasion {
+    position: fixed; inset: 0; pointer-events: none; z-index: 2; overflow: hidden;
+    // corner decorations sit bottom-right, out of the way of the buttons at the top
+    .o_prism_occ_art { position: absolute; bottom: 8px; inset-inline-end: 14px; width: 210px; height: auto; color: var(--prism-on-bg, #fff);
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .25)); opacity: .95; }
+    .o_prism_occ_chip {
+        position: absolute; bottom: 14px; inset-inline-start: 14px; padding: 5px 14px; border-radius: 999px; font-size: .8rem; font-weight: 800;
+        color: #fff; background: rgba(0, 0, 0, .45); backdrop-filter: blur(8px); letter-spacing: .02em; box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+    }
+    .o_prism_swing { transform-origin: 0 0; animation: prism-swing 4s ease-in-out infinite alternate; }
+    .o_prism_glow { animation: prism-glow 2.4s ease-in-out infinite alternate; }
+    .o_prism_twinkle { transform-box: fill-box; transform-origin: center; animation: prism-star 2.2s ease-in-out infinite alternate; }
+    &.o_prism_o_founding .o_prism_occ_art, &.o_prism_o_national .o_prism_occ_art {
+        top: auto; bottom: 0; inset-inline-start: 0; inset-inline-end: auto; width: 100%; height: 34px; opacity: .9;
+    }
+    &.o_prism_o_founding .o_prism_occ_chip { bottom: 48px; background: #5b3a1a; }
+    &.o_prism_o_national .o_prism_occ_art { height: 46px; }
+    &.o_prism_o_national .o_prism_occ_chip { bottom: 56px; background: #006c35; }
+    &.o_prism_o_ramadan .o_prism_occ_chip { background: linear-gradient(90deg, #1e1b4b, #4c1d95); }
+    &.o_prism_o_eid .o_prism_occ_chip { background: linear-gradient(90deg, #be185d, #7c3aed); }
+    .o_prism_flake {
+        position: absolute; top: -12px; width: 7px; height: 7px; border-radius: 50%; background: #fff; box-shadow: 0 0 6px rgba(255, 255, 255, .8);
+        animation-name: prism-snow; animation-timing-function: linear; animation-iteration-count: infinite;
+    }
+}
+body.o_prism_lite .o_prism_occasion * { animation: none !important; }
+@keyframes prism-swing { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes prism-glow { from { opacity: .55; } to { opacity: 1; } }
+@keyframes prism-star { from { transform: scale(.6); opacity: .4; } to { transform: scale(1.1); opacity: 1; } }
+@keyframes prism-snow { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(40px, 105vh, 0); } }
+@media (prefers-reduced-motion: reduce) {
+    .o_prism_occasion * { animation: none !important; }
+    .o_prism_occasion .o_prism_flake { display: none; }
+}
+
+// ---------------------------------------------------------------- studio additions
+.o_prism_studio {
+    .o_prism_note {
+        font-size: .78rem; padding: 8px 10px; border-radius: 10px; margin-bottom: 4px;
+        background: color-mix(in srgb, var(--prism-pick, #7c3aed) 12%, transparent);
+    }
+    .o_prism_row { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+    .o_prism_disabled { opacity: .45; pointer-events: none; }
+    .o_prism_photo_icon { position: absolute; inset-inline-end: 9px; bottom: 7px; color: #fff; z-index: 1; }
+    .o_prism_photo_row .btn { white-space: nowrap; }
+}
+
+// ---------------------------------------------------------------- right to left (Arabic): mirrored details
+html[dir="rtl"] body.o_prism {
+    .o_horizontal_separator { background-position: bottom right; background-image: linear-gradient(270deg, var(--prism-accent), transparent); }
+    .o_prism_sidebar_nav .o_prism_sb_item.active { box-shadow: inset -3px 0 0 var(--prism-accent); }
+    .btn-primary::after { transform: skewX(18deg); }
+}
+html[dir="rtl"] .o_prism_studio .o_prism_card {
+    text-align: right;
+    span { left: auto; right: 8px; }
+    .fa-check { right: auto; left: 8px; }
+    .o_prism_now { left: auto; right: 8px; }
+}

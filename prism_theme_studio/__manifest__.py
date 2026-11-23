@@ -1,6 +1,6 @@
 {
     'name': 'Prism Theme Studio',
-    'version': '19.0.2.1.1',
+    'version': '19.0.3.1.0',
     'category': 'Themes/Backend',
     'summary': 'Backend theme with 10 original animated backgrounds, accent colour, fonts, density and live preview, '
                'chosen by every user for himself',
@@ -25,14 +25,24 @@ Written from scratch for Odoo 19 (Community and Enterprise).
     'maintainer': 'Marwan Algaber',
     'license': 'LGPL-3',
     'depends': ['web'],
-    'data': [],
+    'data': [
+        'views/prism_views.xml',
+    ],
     'assets': {
         'web.assets_backend': [
             'prism_theme_studio/static/src/scss/prism_presets.scss',
             'prism_theme_studio/static/src/scss/prism_ui.scss',
             'prism_theme_studio/static/src/scss/prism_deep.scss',
-            'prism_theme_studio/static/src/js/prism_theme.js',
+            'prism_theme_studio/static/src/scss/prism_extras.scss',
+            'prism_theme_studio/static/src/js/prism_core.js',
+            'prism_theme_studio/static/src/js/prism_studio.js',
+            'prism_theme_studio/static/src/js/prism_sidebar.js',
             'prism_theme_studio/static/src/xml/prism_theme.xml',
+            'prism_theme_studio/static/src/xml/prism_sidebar.xml',
+        ],
+        'web.assets_frontend': [
+            'prism_theme_studio/static/src/scss/prism_presets.scss',
+            'prism_theme_studio/static/src/scss/prism_login.scss',
         ],
     },
     'images': ['static/description/banner.png'],

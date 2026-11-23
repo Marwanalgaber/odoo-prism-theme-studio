@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="prism_theme_studio.AppIcon">
+        <span class="o_prism_app_icon">
+            <img t-if="app.image" t-att-src="app.image" alt=""/>
+            <span t-elif="app.icon" class="o_prism_app_glyph" t-attf-style="color: {{app.icon.color}}; background: {{app.icon.backgroundColor}};">
+                <i t-attf-class="{{app.icon.iconClass}}"/>
+            </span>
+        </span>
+    </t>
+
+    <t t-name="prism_theme_studio.Sidebar">
+        <nav t-if="state.shown" t-attf-class="o_prism_sidebar_nav {{state.open ? 'o_open' : ''}}" aria-label="Apps">
+            <div class="o_prism_sb_top">
+                <button class="o_prism_sb_btn" t-on-click="toggle" t-att-title="state.open ? 'Collapse' : 'Expand'">
+                    <i t-attf-class="fa {{state.open ? 'fa-angle-double-left' : 'fa-angle-double-right'}}"/>
+                </button>
+                <button class="o_prism_sb_btn" t-on-click="home" title="My home"><i class="fa fa-th-large"/></button>
+            </div>
+            <input t-if="state.open" class="o_prism_sb_search form-control form-control-sm" placeholder="Find an app…"
+                   t-on-input="(ev) => this.state.search = ev.target.value"/>
+            <div class="o_prism_sb_list">
+                <div t-if="pinned.length and state.open" class="o_prism_sb_title">Pinned</div>
+                <t t-foreach="pinned" t-as="app" t-key="'p' + app.id">
+                    <a href="#" t-attf-class="o_prism_sb_item {{app.id === currentId ? 'active' : ''}}" t-att-title="app.name"
+                       t-on-click.prevent="() => this.open(app)">
+                        <t t-call="prism_theme_studio.AppIcon"/>
+                        <span t-if="state.open" class="o_prism_sb_name" t-esc="app.name"/>
+                        <i t-if="state.open" class="fa fa-thumb-tack o_prism_sb_pin o_pinned" title="Unpin" t-on-click="(ev) => this.pin(ev, app)"/>
+                    </a>
+                </t>
+                <div t-if="pinned.length and state.open" class="o_prism_sb_title">All apps</div>
+                <div t-elif="pinned.length" class="o_prism_sb_sep"/>
+                <t t-foreach="others" t-as="app" t-key="app.id">
+                    <a href="#" t-attf-class="o_prism_sb_item {{app.id === currentId ? 'active' : ''}}" t-att-title="app.name"
+                       t-on-click.prevent="() => this.open(app)">
+                        <t t-call="prism_theme_studio.AppIcon"/>
+                        <span t-if="state.open" class="o_prism_sb_name" t-esc="app.name"/>
+                        <i t-if="state.open" class="fa fa-thumb-tack o_prism_sb_pin" title="Pin to the top" t-on-click="(ev) => this.pin(ev, app)"/>
+                    </a>
+                </t>
+            </div>
+        </nav>
+    </t>
+
+    <t t-name="prism_theme_studio.Home">
+        <div class="o_action o_prism_home">
+            <div class="o_prism_home_inner">
+                <header class="o_prism_home_hero">
+                    <div>
+                        <div class="o_prism_home_greet"><t t-esc="greeting"/>, <t t-esc="firstName"/></div>
+                        <div class="o_prism_home_date"><t t-esc="date"/> · <t t-esc="hijri"/></div>
+                        <div t-if="occasion" class="o_prism_home_occasion"><i class="fa fa-star me-1"/><t t-esc="occasion"/></div>
+                    </div>
+                    <div class="o_prism_home_clock" t-esc="time"/>
+                </header>
+                <input class="o_prism_home_search form-control" placeholder="Find an app and press Enter…" autofocus="autofocus"
+                       t-on-input="(ev) => this.state.search = ev.target.value" t-on-keydown="onSearchKey"/>
+                <section t-if="pinned.length and !state.search">
+                    <div class="o_prism_home_title">Pinned</div>
+                    <div class="o_prism_home_grid o_pins">
+                        <t t-foreach="pinned" t-as="app" t-key="'p' + app.id">
+                            <button class="o_prism_tile" t-on-click="() => this.open(app)" t-att-title="app.name">
+                                <t t-call="prism_theme_studio.AppIcon"/>
+                                <span class="o_prism_tile_name" t-esc="app.name"/>
+                                <i class="fa fa-thumb-tack o_prism_tile_pin o_pinned" title="Unpin" t-on-click="(ev) => this.pin(ev, app)"/>
+                            </button>
+                        </t>
+                    </div>
+                </section>
+                <section>
+                    <div class="o_prism_home_title">Apps</div>
+                    <div class="o_prism_home_grid">
+                        <t t-foreach="apps" t-as="app" t-key="app.id">
+                            <button class="o_prism_tile" t-on-click="() => this.open(app)" t-att-title="app.name">
+                                <t t-call="prism_theme_studio.AppIcon"/>
+                                <span class="o_prism_tile_name" t-esc="app.name"/>
+                                <i t-attf-class="fa fa-thumb-tack o_prism_tile_pin {{state.pins.includes(app.id) ? 'o_pinned' : ''}}"
+                                   title="Pin" t-on-click="(ev) => this.pin(ev, app)"/>
+                            </button>
+                        </t>
+                    </div>
+                    <div t-if="!apps.length" class="o_prism_home_empty">No app found.</div>
+                </section>
+            </div>
+        </div>
+    </t>
+</templates>

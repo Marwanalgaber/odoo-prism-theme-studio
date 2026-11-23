@@ -94,6 +94,12 @@ body.o_prism {
         --prism-nav-bg: rgba(24, 24, 27, .7); --prism-nav-text: #f4f4f5; --prism-nav-line: rgba(255, 255, 255, .08);
         --prism-on-bg: #f4f4f5; --prism-default-accent: #f59e0b;
     }
+    &.o_prism_p_photo {     // the picture itself is drawn on body::before (prism_extras.scss)
+        --prism-bg: #0f172a;
+        --prism-glow: none;
+        --prism-nav-bg: rgba(15, 23, 42, .45); --prism-nav-text: #ffffff; --prism-nav-line: rgba(255, 255, 255, .18);
+        --prism-on-bg: #ffffff; --prism-default-accent: #64748b;
+    }
     &.o_prism_p_neon {
         --prism-bg: radial-gradient(70% 30% at 50% 58%, rgba(236, 72, 153, .55), transparent 70%),
                     linear-gradient(180deg, #0b0221 0%, #1a0536 50%, #2a0845 58%, #0b0221 100%);

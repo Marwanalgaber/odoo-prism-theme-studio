@@ -1,0 +1,30 @@
+// Prism on the login page (company option "Prism on the login page"). The page is outside the backend, so it has its
+// own small rules: the company style as background (prism_presets.scss), the sign-in card as frosted glass.
+body.o_prism.o_prism_login {
+    background: var(--prism-bg) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh;
+    &::before {
+        content: ""; position: fixed; inset: -15%; z-index: 0; pointer-events: none; background: var(--prism-glow);
+        animation: prism-login-drift 28s ease-in-out infinite alternate;
+    }
+    &.o_prism_p_photo::before { background: var(--prism-photo) center / cover no-repeat; filter: blur(6px) brightness(.94); inset: -28px; animation: none; }
+    #wrapwrap, main, .o_stl_login, .o_stl_login_main, .o_stl_login_brand { background: transparent !important; position: relative; z-index: 1; }
+    .oe_login_form, .card, .o_stl_login_card, .o_database_list {
+        background: rgba(255, 255, 255, .82) !important; backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        border: 1px solid rgba(255, 255, 255, .5); border-radius: 18px; box-shadow: 0 24px 60px rgba(0, 0, 0, .25); color: #111827;
+    }
+    .oe_login_form { padding: 26px 28px; }
+    .btn-primary {
+        background-color: var(--prism-user-accent, var(--prism-default-accent)) !important; border-color: var(--prism-user-accent, var(--prism-default-accent)) !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+    }
+    .o_stl_login_brand, .o_stl_login_brand * { color: var(--prism-nav-text, #fff); }
+}
+@keyframes prism-login-drift {
+    0% { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+    100% { transform: translate3d(3%, 3%, 0) rotate(5deg) scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+    body.o_prism.o_prism_login::before { animation: none; }
+}

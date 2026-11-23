@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- "My home": greeting, clock, dates, pinned apps and all apps -->
+    <record id="action_prism_home" model="ir.actions.client">
+        <field name="name">Home</field>
+        <field name="tag">prism_theme_studio.home</field>
+    </record>
+
+    <!-- company look, set by the administrator -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.prism</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Prism Theme" string="Prism Theme" name="prism_theme_studio" groups="base.group_system">
+                    <block title="Company look" name="prism_company_look">
+                        <setting string="Company look for all users"
+                                 help="Users who have not chosen their own look get this one. They can still change it, unless it is locked.">
+                            <field name="prism_default_enabled"/>
+                            <div class="mt-2" invisible="not prism_default_enabled and not prism_lock">
+                                <div class="row"><label class="col-4 o_light_label" for="prism_default_preset" string="Style"/>
+                                    <field name="prism_default_preset" class="col-8"/></div>
+                                <div class="row"><label class="col-4 o_light_label" for="prism_default_accent" string="Accent colour"/>
+                                    <field name="prism_default_accent" class="col-8" placeholder="#0F766E" widget="color"/></div>
+                            </div>
+                        </setting>
+                        <setting string="Lock the look" help="Every user of the company has the company style and colour and cannot change them (font, spacing, effects and menu stay personal).">
+                            <field name="prism_lock"/>
+                        </setting>
+                        <setting string="Company background photo" help="Used by the style &quot;My photo&quot; for users without their own photo. Mark it dark if the picture is dark, so the screens are dark too.">
+                            <field name="prism_background" widget="image" class="w-50" options="{'size': [180, 100]}"/>
+                            <div><field name="prism_photo_dark"/> <label for="prism_photo_dark" string="The photo is dark"/></div>
+                        </setting>
+                        <setting string="Prism on the login page" help="The sign-in page shows the company style.">
+                            <field name="prism_login"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- login page: the company style as background (only when the company asks for it) -->
+    <template id="login_prism" inherit_id="web.login" name="Prism login page">
+        <xpath expr="//form" position="before">
+            <t t-set="prism_company" t-value="request.env.company.sudo()"/>
+            <t t-if="prism_company.prism_login">
+                <t t-set="prism_preset" t-value="prism_company.prism_default_preset if prism_company.prism_default_preset not in ('auto', 'photo') or (prism_company.prism_default_preset == 'photo' and prism_company.prism_background) else ('aurora' if prism_company.prism_default_preset == 'auto' else 'graphite')"/>
+                <script>
+                    (function () {
+                        var body = document.body;
+                        body.classList.add("o_prism", "o_prism_login", "o_prism_p_<t t-out="prism_preset"/>");
+                        <t t-if="prism_company.prism_default_accent">body.style.setProperty("--prism-user-accent", "<t t-out="prism_company.prism_default_accent"/>");</t>
+                        <t t-if="prism_preset == 'photo'">body.style.setProperty("--prism-photo", 'url("/prism_theme_studio/login_background")');</t>
+                    })();
+                </script>
+            </t>
+        </xpath>
+    </template>
+</odoo>
